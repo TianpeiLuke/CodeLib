@@ -1,6 +1,6 @@
 # CodeLib
    
-   by Tianpei Xie, Jan 18, 2017 
+   created by Tianpei Xie, Jan 18, 2017 
 
    For algorithm leanring, includes implementations in C++
 
