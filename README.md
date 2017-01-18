@@ -3,6 +3,6 @@
    
   For algorithm leanring, includes implementations in C++
   
-  ## List of algorithms
+   ## List of algorithms
   
   
