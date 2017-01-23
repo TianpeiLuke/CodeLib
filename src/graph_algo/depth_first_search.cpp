@@ -170,16 +170,18 @@ bool depth_first_search(vector<vector<int>> adjList, int root, int target, vecto
 
 void depth_first_traverse_SCC_r1(const vector<vector<int>> adjList, int root, int& root_time, vector<int>& finishing_time, vector<int>& leader,  vector<bool>& visited, const unordered_map<int, int> nodeIdxMap){
     /*
-         The DFS algorithm for SCC, 
-          finishing_time is the reverse ordering of the node visited by DFS
+         The DFS algorithm for the first round of SCC
+         computing the finishing_time
+
+         finishing_time is the reverse ordering of the node visited by DFS
     */
     if(root == -1) cerr<<"The root node does not exist !"<<endl;
 
     cout<<"Depth-First-Search"<<endl;
-    stack<int> nodeStack;
-    stack<int> reverseStack;
+    stack<int> nodeStack;     // used for depth-first-search
+    stack<int> reverseStack;  // used to compute the reverse ordering of the node visited by DFS
 
-    int leaderSCC = root;  // set the leader of SCC as the root of the new DFS 
+    int leaderSCC = root;     // set the leader of SCC as the root of the new DFS 
 
     int nodeIdx = -1;
     int outdegree = 0;
@@ -190,8 +192,8 @@ void depth_first_traverse_SCC_r1(const vector<vector<int>> adjList, int root, in
         //cout<<"Size of stack "<<nodeStack.size()<<endl;
         nodeIdx = nodeStack.top();
         visited[nodeIdx] = true;
-        reverseStack.push(nodeIdx);   //stack the reversed order
-        leader[nodeIdx] = leaderSCC;                  // set the leader of SCC 
+        reverseStack.push(nodeIdx);             //stack the reversed order
+        leader[nodeIdx] = leaderSCC;            // set the leader of SCC 
         // cout<<"Node "<<adjList[nodeIdx][0]<<" visited"<<endl;
         nodeStack.pop();
         outdegree = adjList[nodeIdx].size();
@@ -212,7 +214,7 @@ void depth_first_traverse_SCC_r1(const vector<vector<int>> adjList, int root, in
     int reverseIdx = -1;
     while(!reverseStack.empty()){
         reverseIdx = reverseStack.top();
-        root_time ++ ;
+        root_time ++ ;      // count the reverse ordering
         finishing_time[reverseIdx] = root_time;
         reverseStack.pop();
         //cout<<"Finishing time of "<<adjList[reverseIdx][0]<<": "<<root_time<<endl;
@@ -229,7 +231,8 @@ void depth_first_SCC(vector<vector<int>> adjList, int root, vector<bool>& visite
         nodeIdxMap[nodeIdx][vectorIdx] is the map between the graph node index and the vector index i 
         finishing_time[i] is the reversed order of node index visited by DFS
         leader[i] is the root node of cluster containing node i by DFS 
-
+        
+        call depth_first_traverse_SCC_r1() 
     */
     if(adjList.empty()) cerr<<"The input graph is empty !"<<endl;
     int n = adjList.size();
@@ -280,16 +283,20 @@ void depth_first_SCC(vector<vector<int>> adjList, int root, vector<bool>& visite
 
 void depth_first_traverse_SCC_r2(const vector<vector<int>> adjList, const int root, vector<int>& finishing_time, vector<int>& leader, vector<int>& SCC_size, vector<bool>& visited, const unordered_map<int, int> nodeIdxMap){
     /*
-         The DFS algorithm for SCC, 
-          finishing_time is the reverse ordering of the node visited by DFS
+         The DFS algorithm for the second round of SCC
+         compute the size of SCC
+         
+         SCC_size[i] store the size of SCC[i] 
+         finishing_time[...] to be reset 
+         leader[i] record the root of the SCC that contains node i
     */
     if(root == -1) cerr<<"The root node does not exist !"<<endl;
 
     cout<<"Depth-First-Search"<<endl;
     stack<int> nodeStack;
-    stack<int> reverseStack;
+    stack<int> reverseStack;  // used to store all visited nodes
 
-    int leaderSCC = root;  // set the leader of SCC as the root of the new DFS 
+    int leaderSCC = root;     // set the leader of SCC as the root of the new DFS 
 
     int nodeIdx = -1;
     int outdegree = 0;
@@ -300,8 +307,8 @@ void depth_first_traverse_SCC_r2(const vector<vector<int>> adjList, const int ro
         //cout<<"Size of stack "<<nodeStack.size()<<endl;
         nodeIdx = nodeStack.top();
         visited[nodeIdx] = true;
-        reverseStack.push(nodeIdx);   //stack the reversed order
-        leader[nodeIdx] = leaderSCC;                  // set the leader of SCC 
+        reverseStack.push(nodeIdx);            // record the trejactory
+        leader[nodeIdx] = leaderSCC;           // set the leader of SCC 
         // cout<<"Node "<<adjList[nodeIdx][0]<<" visited"<<endl;
         nodeStack.pop();
         outdegree = adjList[nodeIdx].size();
@@ -310,7 +317,6 @@ void depth_first_traverse_SCC_r2(const vector<vector<int>> adjList, const int ro
             try{
                 childIdx = nodeIdxMap.at(adjList[nodeIdx][j]);
             }catch(const std::out_of_range& oor){
-                // cout<<"Node "<<adjList[nodeIdx][j]<<" dropped"<<endl;
                 continue; //visit a sink node with no out-degree
             }
             if (visited[childIdx] == false)
@@ -323,8 +329,8 @@ void depth_first_traverse_SCC_r2(const vector<vector<int>> adjList, const int ro
     int SCC_count = 0;
     while(!reverseStack.empty()){
         reverseIdx = reverseStack.top();
-        SCC_count ++ ;
-        finishing_time[reverseIdx] = INT_MIN;
+        SCC_count ++ ;             // count the size of strong connected component
+        finishing_time[reverseIdx] = INT_MIN; // record the path by resetting the finishing time 
         reverseStack.pop();
     }
     SCC_size.push_back(SCC_count);
@@ -335,11 +341,11 @@ void depth_first_traverse_SCC_r2(const vector<vector<int>> adjList, const int ro
 void depth_second_SCC(const vector<vector<int>> adjList, const unordered_map<int, int> nodeIdxMap, const vector<int> finishing_time,  vector<int>& leader, vector<int>& SCC_size, vector<bool>& visited){
 /*
        The second round of SCC algorithm
-       set the root according to finishing time 
-
+       set the root of DFS according to finishing time (from large to small)
+       call depth_first_traverse_SCC_r2, resetting the finishing_time, and leader 
+            then compute the size of SCC
 
 */
-
 
     if(adjList.empty()) cerr<<"The input graph is empty !"<<endl;
     int n = adjList.size();
