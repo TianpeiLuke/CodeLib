@@ -49,5 +49,4 @@ void SCC(vector<vector<int>> adjList, unordered_map<int, int> nodeloc,  vector<i
        for(int i=0; i< min(5,ss); i++){
          cout<<SCC_size[i]<<endl;
        }
-
 }

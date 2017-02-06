@@ -8,7 +8,10 @@
 #ifndef _DYNAMIC_PROGRAMMING
 #define _DYNAMIC_PROGRAMMING
 
+#ifndef _NAMESPACE
+#define _NAMESPACE
 using namespace std;
+#endif
 
 // minimum path sum
 int minPathSum(vector<vector<int>>& grid);

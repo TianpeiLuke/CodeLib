@@ -32,6 +32,13 @@ int main(int argc, char* argv[]){
    cout<<"Compute the strong connected components"<<endl;
    SCC(adjList, nodeloc, SCC_size, verbose);
    
+  
+   vector<int> answer;
+   answer = {434821, 968, 459, 313, 211}
+   bool is_equal  = false;
+   is_equal = equal(SCC_size.begin(), SCC_size.begin()+5, answer.begin());
+   if(is_equal) cout<<"Correct answer !"<<endl;
+   else cout<<"Wrong answer !"<<endl;
 
    return 0;
 }

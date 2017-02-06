@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include <string>
 #include <climits>
+#include <utility>
 
 #ifndef _GRAPH_ALGO_SEARCH
 #define _GRAPH_ALGO_SEARCH
@@ -43,5 +44,10 @@ void depth_first_SCC(vector<vector<int>> adjList, int root, vector<bool>& visite
 
 
 void depth_second_SCC(const vector<vector<int>> adjList, const unordered_map<int, int> nodeIdxMap, const vector<int> finishing_time, vector<int>& leader, vector<int>& SCC_size, vector<bool>& visited);
+
+// Remove Invalid Parentheses
+bool check(string s);
+
+vector<string> removeInvalidParentheses(string s);
 
 #endif

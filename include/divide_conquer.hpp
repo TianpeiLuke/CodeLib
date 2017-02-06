@@ -10,7 +10,11 @@
 
 #ifndef _DIVIDE_CONQUER
 #define _DIVIDE_CONQUER
+
+#ifndef _NAMESPACE
+#define _NAMESPACE
 using namespace std;
+#endif
 
 // For integerSum and integerMul
 void Print(vector<int> x);
