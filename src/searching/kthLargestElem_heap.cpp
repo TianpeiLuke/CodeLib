@@ -168,46 +168,46 @@ bool kthLargestElem_heap(vector<int> input, int& result, int k,  vector<int>&his
 }
 
 
-int main(int argc, char* argv[]){
-   int length = 0;
-   if(argc < 4){
-      length = 10000;
-   }else{
-      length = stoi(argv[3], nullptr, 10);
-   }
-
-   int k = 1;
-   if(argc < 3){
-       k = 5;
-   }else{
-       k = stoi(argv[2], nullptr, 10);
-   }
-
-   string filename;
-   vector<int> input;
-   if(argc < 2){
-       input = {1, 10, 99, 5, 4, 6, 9, 24, 80, 11, 15};
-      //filename = "../../data/Median.txt";
-   }else{
-      filename = argv[1];
-   }
-
-   int result = 0;
-    
-   vector<int> history;
-
-   if(argc >=2 ){
-       if(!kthLargestElem_heap(filename, result, k, history, length)){
-          return -1;
-       }
-   }
-   else{
-       if(!kthLargestElem_heap(input, result, k, history)){
-          return -1;
-       }
-   }
-
-   cout<<"final result: "<<k<<"-th Largest elem in size of "<<length<<": "<<result<<endl;
-   return 0;
-}
+//int main(int argc, char* argv[]){
+//   int length = 0;
+//   if(argc < 4){
+//      length = 10000;
+//   }else{
+//      length = stoi(argv[3], nullptr, 10);
+//   }
+//
+//   int k = 1;
+//   if(argc < 3){
+//       k = 5;
+//   }else{
+//       k = stoi(argv[2], nullptr, 10);
+//   }
+//
+//   string filename;
+//   vector<int> input;
+//   if(argc < 2){
+//       input = {1, 10, 99, 5, 4, 6, 9, 24, 80, 11, 15};
+//      //filename = "../../data/Median.txt";
+//   }else{
+//      filename = argv[1];
+//   }
+//
+//   int result = 0;
+//    
+//   vector<int> history;
+//
+//   if(argc >=2 ){
+//       if(!kthLargestElem_heap(filename, result, k, history, length)){
+//          return -1;
+//       }
+//   }
+//   else{
+//       if(!kthLargestElem_heap(input, result, k, history)){
+//          return -1;
+//       }
+//   }
+//
+//   cout<<"final result: "<<k<<"-th Largest elem in size of "<<length<<": "<<result<<endl;
+//   return 0;
+//}
 

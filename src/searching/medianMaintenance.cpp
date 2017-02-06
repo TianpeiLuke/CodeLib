@@ -97,32 +97,32 @@ bool medMaintanence(string filename, int length,  vector<int>& history){
 }
 
 
-int main(int argc, char* argv[]){
-   int length = 0;
-   if(argc < 3){
-      length = 10000;
-   }else{
-      length = stoi(argv[2], nullptr, 10);
-   }
-
-   string filename;
-   if(argc < 2){
-      filename = "../../data/Median.txt";
-   }else{
-      filename = argv[1];
-   }
-    
-   vector<int> history;
-
-   if(!medMaintanence(filename, length,  history)){
-       return -1;
-   }
-
-   int sum = 0;
-   for(auto x: history){
-        sum = sum + x;
-   }
-   sum = sum % 10000;
-   cout<<"modulo average of "<<history.size()<<" medians: "<<sum<<endl;
-   return 0;
-}
+//int main(int argc, char* argv[]){
+//   int length = 0;
+//   if(argc < 3){
+//      length = 10000;
+//   }else{
+//      length = stoi(argv[2], nullptr, 10);
+//   }
+//
+//   string filename;
+//   if(argc < 2){
+//      filename = "../../data/Median.txt";
+//   }else{
+//      filename = argv[1];
+//   }
+//    
+//   vector<int> history;
+//
+//   if(!medMaintanence(filename, length,  history)){
+//       return -1;
+//   }
+//
+//   int sum = 0;
+//   for(auto x: history){
+//        sum = sum + x;
+//   }
+//   sum = sum % 10000;
+//   cout<<"modulo average of "<<history.size()<<" medians: "<<sum<<endl;
+//   return 0;
+//}

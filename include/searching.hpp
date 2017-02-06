@@ -20,6 +20,46 @@
 using namespace std;
 #endif
 
+// binary search tree
+struct BST_Node
+{
+   int val; 
+   BST_Node* left;
+   BST_Node* right;
+   BST_Node(int val=0): val(val), left(NULL), right(NULL){}
+};
+
+
+BST_Node* build_bst(const vector<int> input);
+
+void insert_bst(BST_Node* root, int val);
+
+//augmented binary search tree
+struct ABST_Node
+{
+   int val;
+   int size; // store the size of nodes in the subtree of node   
+   ABST_Node* left;
+   ABST_Node* right;
+};
+
+ABST_Node* build_abst(const vector<int> input);
+
+void insert_abst(ABST_Node* root, int val);
+
+// pre-order,  in-order, and post-order traversal
+
+void pre_order_traversal_recur(BST_Node* root);
+
+void pre_order_traversal_vec(BST_Node* root);
+
+void in_order_traversal_recur(BST_Node* root);
+
+void in_order_traversal_vec(BST_Node* root);
+
+void post_order_traversal_recur(BST_Node* root);
+
+void post_order_traversal_vec(BST_Node* root);
 
 // kthLargestElem_heap using min-heap and max-heap
 
