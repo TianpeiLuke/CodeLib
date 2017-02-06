@@ -26,7 +26,7 @@ struct BST_Node
    int val; 
    BST_Node* left;
    BST_Node* right;
-   BST_Node(int val=0): val(val), left(NULL), right(NULL){}
+   BST_Node(int x=0): val(x), left(NULL), right(NULL){}
 };
 
 

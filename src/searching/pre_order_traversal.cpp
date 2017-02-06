@@ -16,10 +16,10 @@ void pre_order_traversal_recur(BST_Node* root){
 
     if (root == NULL) return;
     BST_Node* cur = root;
-    while(cur!=NULL){
+    if (cur!=NULL){
         cout<<"node value: "<<cur->val<<endl;
-        in_order_traversal_recur(cur->left);
-        in_order_traversal_recur(cur->right);
+        pre_order_traversal_recur(cur->left);
+        pre_order_traversal_recur(cur->right);
     }
 }
 
