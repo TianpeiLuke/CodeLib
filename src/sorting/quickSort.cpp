@@ -1,4 +1,4 @@
-#include "../../include/sorting/quickSort.hpp"
+#include "../../include/sorting.hpp"
 
 int indexMedian(vector<int>& sequence, int i, int j){
 /*
