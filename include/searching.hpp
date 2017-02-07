@@ -32,7 +32,7 @@ struct BST_Node
 
 BST_Node* build_bst(const vector<int> input);
 
-void insert_bst(BST_Node* root, int val);
+void insert_bst(BST_Node*& root, int val);
 
 //augmented binary search tree
 struct ABST_Node
@@ -41,11 +41,12 @@ struct ABST_Node
    int size; // store the size of nodes in the subtree of node   
    ABST_Node* left;
    ABST_Node* right;
+   ABST_Node(int x=0): val(x), size(0), left(NULL), right(NULL){}
 };
 
 ABST_Node* build_abst(const vector<int> input);
 
-void insert_abst(ABST_Node* root, int val);
+void insert_abst(ABST_Node*& root, int val);
 
 // pre-order,  in-order, and post-order traversal
 
