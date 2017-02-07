@@ -26,7 +26,7 @@ ABST_Node* build_abst(const vector<int> input){
        ABST_Node* node = new ABST_Node(x);
        node->left = NULL;
        node->right = NULL;
-       node->size = 0;
+       node->size = 1;
        //cout<<node->val<<endl;
        if(root==NULL){
           root = node;
@@ -47,20 +47,22 @@ ABST_Node* build_abst(const vector<int> input){
              cur = cur->left;  //search left subtree if < root
           }
        }
-       if(ifleft)
+       if(ifleft){
           parent->left = node;
           while(!tracker.empty()){
             ABST_Node* cur_parent = tracker.top();
             tracker.pop();
             cur_parent->size = cur_parent->size + 1;
           }
-       else
+       }
+       else{
           parent->right = node;
           while(!tracker.empty()){
             ABST_Node* cur_parent = tracker.top();
             tracker.pop();
             cur_parent->size = cur_parent->size + 1;
           }
+       }
     }
     return root;
 }
@@ -74,8 +76,8 @@ void insert_abst(ABST_Node*& root, int val){
        return;
     }
     bool ifleft = false;
-    BST_Node* cur = root;
-    BST_Node* parent = root;
+    ABST_Node* cur = root;
+    ABST_Node* parent = root;
     while(cur!=NULL){
        if(val >= cur->val){
            ifleft = false;
@@ -105,4 +107,37 @@ void insert_abst(ABST_Node*& root, int val){
        }
     }
 
+}
+
+void in_order_traversal_vec(ABST_Node* root){
+
+   if(root == NULL) return;
+
+   stack<ABST_Node*> tracker;
+   tracker.push(root);
+   unordered_map<ABST_Node*, bool> visit;
+   visit[NULL] = false;
+   // backtracking, begining from the left-subtree
+   while(!tracker.empty()){
+      ABST_Node* cur = tracker.top();
+      //by construction, cur not NULL
+      try{
+         bool trial = visit.at(cur);
+      }catch(const out_of_range& oor){
+         visit[cur] = false;
+      }
+      //*========= key is to judge when to visit ===============
+      if(cur->left == NULL || visit[cur->left]==true){ //
+        //visit if left subtree is empty
+        cout<<"node value: "<<cur->val<<" size "<<cur->size<<endl;
+        tracker.pop();
+        visit[cur] = true;
+        //then beginning traverse the right subtree
+        if(cur->right != NULL) tracker.push(cur->right);
+      }else{
+        if(visit[cur->left] == false)
+            tracker.push(cur->left); //by default, traverse througth the left subtree
+      }
+
+   }
 }
