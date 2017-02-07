@@ -69,7 +69,7 @@ int edit_distance(const string pattern, const string text){
    int t_n = pattern.size();
 
 
-   vector<vector<int>> dynamic_table; // size p_n x t_n
+   vector<vector<int>> dynamic_table; // size (p_n+1) x (t_n+1)
    //initialization
    for(int i=0; i<p_n+1; i++){
       vector<int> row(t_n+1, 0); 
