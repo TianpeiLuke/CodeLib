@@ -40,10 +40,6 @@ bool depth_first_search(vector<vector<int>> adjList, int root, int target, vecto
 //void depth_first_traverse_basic_SCC(const vector<vector<int>> adjList, int root, int& root_time,  vector<int>& finishing_time, vector<int>& leader,  vector<bool>& visited, const unordered_map<int, int> nodeIdxMap);
 
 
-void depth_first_SCC(vector<vector<int>> adjList, int root, vector<bool>& visited, vector<int>& finishing_time, vector<int>&leader,  unordered_map<int, int>& nodeIdxMap );
-
-
-void depth_second_SCC(const vector<vector<int>> adjList, const unordered_map<int, int> nodeIdxMap, const vector<int> finishing_time, vector<int>& leader, vector<int>& SCC_size, vector<bool>& visited);
 
 // Remove Invalid Parentheses
 bool check(string s);

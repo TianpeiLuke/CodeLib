@@ -12,7 +12,7 @@ Examples:
 
 */
 
-#include "../../include/graph_algo/graph_search.hpp"
+#include "../../include/graph_search.hpp"
 
 bool check(string s){
 

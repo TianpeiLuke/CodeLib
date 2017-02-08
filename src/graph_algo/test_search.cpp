@@ -1,5 +1,5 @@
-#include "../../include/graph_algo/graph_construct.hpp"
-#include "../../include/graph_algo/graph_search.hpp"
+#include "../../include/graph_construct.hpp"
+#include "../../include/graph_search.hpp"
 
 
 

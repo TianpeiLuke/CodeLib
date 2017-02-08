@@ -1,6 +1,74 @@
-#include "../../include/graph_algo/graph_construct.hpp"
+#include "../../include/graph_construct.hpp"
 
 
+
+void copy_AdjList(const vector<vector<int>*> AdjList, const vector<int> NodeList, vector<vector<int>*>& Copy_AdjList, vector<int>& Copy_NodeList){
+    if(!Copy_AdjList.empty()) Copy_AdjList.clear();
+    if(!Copy_NodeList.empty()) Copy_NodeList.clear();
+    for(int i=0; i<AdjList.size(); i++){
+        int size_row = AdjList[i]->size();
+        vector<int> * temp = new vector<int> ();
+        
+        for(auto j=AdjList[i]->begin(); j<AdjList[i]->end(); j++){
+           temp->push_back(*j);
+        }
+        Copy_AdjList.push_back(temp);
+    }
+    for(int i=0; i<NodeList.size(); i++)
+        Copy_NodeList.push_back(NodeList[i]);
+}
+
+
+
+
+void show_AdjList(vector< vector<int>* >& AdjList, int & n){
+    if(n==0) return;
+    for(int i=0; i<n; i++){
+        for(auto row=AdjList[i]->begin(); row<AdjList[i]->end(); row++){
+           cout<<*row<<" ";
+        }
+        cout<<endl;
+    }
+}
+
+
+void read_AdjList(string filename, vector< vector<int>* >& AdjList, vector<int>& NodeList, int & n){
+    int ini_n = AdjList.size();
+    if(ini_n >0) AdjList.clear();
+    if(!NodeList.empty()) NodeList.clear();
+    n = 0;
+    ifstream in_stream;
+    string line;
+    in_stream.open(filename);
+
+    while(getline(in_stream, line)){
+        istringstream linestream(line);
+        vector<int> *temp = new vector<int>();
+        while(!linestream.eof()){
+            int temp_data;
+            linestream>>temp_data;
+            temp->push_back(temp_data);
+        }
+        AdjList.push_back(temp);
+        NodeList.push_back(temp->at(0));
+        n ++;
+    }
+    in_stream.close();
+}
+
+
+void clean_AdjList(vector< vector<int>* >& AdjList, int& n){
+    for(int i=AdjList.size()-1; i>=0; i--){
+        vector<int> * temp;
+        temp = AdjList.back();
+        delete temp;
+        AdjList.pop_back();
+        n--;
+    }
+
+}
+
+//==================================================
 
 bool Graph_load_edge(string filename, vector<vector<int>>& adjList, unordered_map<int, int>& nodeloc ){
 /*
