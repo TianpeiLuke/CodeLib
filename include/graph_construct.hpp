@@ -28,12 +28,13 @@ using namespace std;
 
 //=================================================================
 //bool Graph_load_edge(string filename, vector<vector<int>>& adjList, unordered_map<int, int>& nodeloc);
-bool Graph_load_edges(string filename, unordered_map<int, vector<int>>& adjList, unordered_map<int, bool>& visited);
 
 //void Graph_reverse(const vector<vector<int>> adjList, const unordered_map<int, int> nodeloc,  vector<vector<int>>& adjList_reverse);
 
 
 //====================================================================
+bool Graph_load_edges(string filename, unordered_map<int, vector<int>>& adjList, unordered_map<int, bool>& visited);
+
 bool Graph_load(string filename, unordered_map<int, vector<int>>& adjList, unordered_map<int, bool>& node_visit);
 
 void Graph_reverse(const unordered_map<int, vector<int>> adjList, unordered_map<int, vector<int>>& adjList_reverse);
