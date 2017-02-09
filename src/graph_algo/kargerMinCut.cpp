@@ -1,5 +1,24 @@
 #include "../../include/graph_topology.hpp"
 #include "../../include/graph_construct.hpp"
+/*
+  Karger's Randomized Min Cut computation 
+
+Here, the defintion of min cut:
+       Partition the graph as two subgraphs (groups)
+       Min Cut = the smallest amount of edges that connecting two groups of nodes in an undirected graph
+
+   The basic idea is to use random selection algorithm on the edge set
+
+   while(the total number of groups > 2 and size of total edges > 1){
+          pick one edge randomly 
+          merge the groups corresponding to both end points into one group
+          delete the edges that connects within the group (self-looping edges)
+   }
+   return the remaining edges that connects two remaining groups
+
+In implementation, we use the UnionFind algorithm to merge groups of nodes when an edge that connects them are selected. 
+
+*/
 
 void show_edges(const map<pair<int, int>, bool> edge_visit){
 
@@ -26,8 +45,11 @@ int unique_pair(const map<pair<int, int>, bool> edge_visit){
 
 
 int rootfind(const int node, const unordered_map<int, int> node_groups){
-    //find the root of given node, a unique value for each group
-    // takes  O(height) 
+    /*
+       Union find method
+       find the root of given node, a unique value for each group
+       takes  O(height) 
+    */
     int cur = node;
     int parent = node_groups.at(node);
     while(parent != cur){
@@ -40,25 +62,17 @@ int rootfind(const int node, const unordered_map<int, int> node_groups){
 int edgeChange(const unordered_map<int, int> node_groups, map<pair<int, int>, bool>& edge_visit){
     // delete self-loop that connects both nodes within one group
     vector<pair<int, int>> drop_list;
-    //map<pair<int, int>, bool> temp;
     for(auto it=edge_visit.begin(); it!=edge_visit.end(); it++){
        pair<int, int> edge = it->first;
-       //pair<int, int> edge_re= make_pair(edge.second, edge.first);
-       //if(temp[edge] == true || temp[edge_re] == true) continue;
        int node0 = edge.first;
        int node1 = edge.second;
        //bottleneck
+       // use Union find method to find if both in one group
        int group1 = rootfind(node0, node_groups);
        int group2 = rootfind(node1, node_groups);
-       //cout<<"node"<<node0<<": group"<<group1<<" node"<<node1<<": group"<<group2<<endl;
        if(group1 == group2){
            //drop self-loop
-           //temp[edge] = true;
-           //temp[edge_re] = true;
-           //cout<<"drop self-loop edges" <<endl;
            drop_list.push_back(edge);
-           //drop_list.push_back(edge_re);
-           //it -- ;
        }
     }
     for(auto edge_temp: drop_list){
@@ -70,6 +84,7 @@ int edgeChange(const unordered_map<int, int> node_groups, map<pair<int, int>, bo
 
 void nodeMerge(const pair<int, int> edge, unordered_map<int, int>& node_groups){
     /* 
+        use Union find method: 
         merge two end points as one, delete the redundant node in node_visit
         by construction, the end point of edge should not all in the same group
     */
@@ -83,12 +98,6 @@ void nodeMerge(const pair<int, int> edge, unordered_map<int, int>& node_groups){
     // take union of two groups
     int add_root = min(root0, root1);
     node_groups[merge_root] = add_root; //ask the root of one tree point to the root of the other tree
-    //for(auto it= node_groups.begin(); it!= node_groups.end(); it++){
-    //      if(it->second == remove_key){
-    //          it->second = new_key;
-    //      }
-    //}
-    // merge groups
 }
 
 
@@ -123,22 +132,19 @@ int total_groups(const unordered_map<int, int> node_groups){
         else if(group_number.find(root) == group_number.end()) 
            group_number.insert(root);
     }
-    //for(auto i=group_number.begin(); i!=group_number.end(); i++){
-    //     cout<<*i<<" ";
-    //}cout<<endl;
     return group_number.size();
 }
 
 
 int computeRandCuts(vector<pair<int, int>>& edgeList){
     /*
+    Main algorithm:
         loop over existing edges when edgeList.size() > 1
             e= random pick one edge
             merge(node[e0], node[e1]) into one group
             delete edge within one group
         
     */
-    
     unordered_map<int, bool> node_visit;
     edgeList_to_nodeHash(edgeList, node_visit);
     map<pair<int, int>, bool> edge_visit;
@@ -151,7 +157,6 @@ int computeRandCuts(vector<pair<int, int>>& edgeList){
          node_groups[node] = node;
     }
     int total_groups_count = total_groups(node_groups);
-    //cout<<"Total groups "<<total_groups_count<<endl;
     int count = 0;
     int total_edge = edgeList.size();
     while(edge_visit.size()>1 && total_groups_count >2){
@@ -173,23 +178,20 @@ int computeRandCuts(vector<pair<int, int>>& edgeList){
 
        //random pick an edge in the edgeList
        pair<int, int> edge_pick = edgeRandPick(edge_visit);
-       //cout<<"Pick edge ("<<edge_pick.first<<"->"<<edge_pick.second<<")"<<endl;
        //merge two end nodes into one group in the given edge
-       //cout<<"node merge"<<endl;
        nodeMerge(edge_pick, node_groups);
        //merge edges and delete the self loops
        int count_delta = edgeChange(node_groups, edge_visit); 
        count = count + count_delta;
-       //show_edges(edge_visit);
 
        total_groups_count = total_groups(node_groups);
-       //cout<<"Total groups "<<total_groups_count<<endl;
     }
     if(total_groups_count != 2){
        cout<<"Error in computation!"<<endl;
        return -1;
     }
     cout<<endl;
+    //for undirected graph, the edge (a,b) and (b,a) are the same
     return unique_pair(edge_visit);
 }
 
