@@ -31,16 +31,18 @@ int main(int argc, char* argv[]){
    SCC_re = SCC(adjList, visited, verbose);
    
   
-   vector<int> answer;
-   answer = {434821, 968, 459, 313, 211};
-   bool is_equal  = false;
-   vector<int> result;
-   for(auto it=SCC_re.begin(); it!=SCC_re.end(); it++){
-        result.push_back(it->second);
-   }
-   is_equal = equal(result.begin(), result.begin()+5, answer.begin());
-   if(is_equal) cout<<"Correct answer !"<<endl;
-   else cout<<"Wrong answer !"<<endl;
+//   vector<int> answer;
+//   answer = {434821, 968, 459, 313, 211};
+//   bool is_equal  = false;
+//   vector<int> result;
+//   for(auto it=SCC_re.begin(); it!=SCC_re.end(); it++){
+//        result.push_back(it->second);
+//   }
+//   int n = SCC_re.size();
+//   int n_disp = min(n,5);
+//   is_equal = equal(result.begin(), result.begin()+n_disp, answer.begin());
+//   if(is_equal) cout<<"Correct answer !"<<endl;
+//   else cout<<"Wrong answer !"<<endl;
 
    return 0;
 }

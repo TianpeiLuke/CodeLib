@@ -44,9 +44,9 @@ bool any_nonvisited(const unordered_map<int, bool> visited, int& root);
 
 vector<pair<int,int>> SCC(unordered_map<int, vector<int>> adjList, unordered_map<int, bool> visited, bool verbose);
 
-void dfs_first_SCC(const unordered_map<int, vector<int>> adjList, int root, unordered_map<int, bool>& visited, unordered_map<int, int>& finishing_time, unordered_map<int, int>&leader);
+void dfs_first_SCC(const unordered_map<int, vector<int>> adjList, int root, unordered_map<int, bool>& visited, unordered_map<int, int>& finishing_time, unordered_map<int, int>&leader, bool verbose);
 
-void dfs_second_SCC(const unordered_map<int, vector<int>> adjList, int root, unordered_map<int, bool>&visited, vector<pair<int, int>>&SCC, unordered_map<int, int>& leader);
+void dfs_second_SCC(const unordered_map<int, vector<int>> adjList, const int root, unordered_map<int, bool>&visited, vector<pair<int, int>>&SCC, unordered_map<int, int>& leader, bool verbose);
 
 //void SCC(vector<vector<int>> adjList, unordered_map<int, int> nodeloc, vector<int>& SCC_size, int verbose);
 
