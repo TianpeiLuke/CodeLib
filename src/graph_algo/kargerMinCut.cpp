@@ -1,173 +1,213 @@
 #include "../../include/graph_topology.hpp"
 #include "../../include/graph_construct.hpp"
 
+void show_edges(const map<pair<int, int>, bool> edge_visit){
 
-
-
-
-void EdgePick(vector<int>& NodeList, int& node_i, int& node_j, unsigned seed=0){
-   srand (seed); // use given seed
-   vector<int> NodeList_temp(NodeList.size(),0);
-   copy(NodeList.begin(), NodeList.end(), NodeList_temp.begin());
-   // random shuffle 
-   random_shuffle(NodeList_temp.begin(), NodeList_temp.end());
-   node_i = NodeList_temp[0];
-   node_j = NodeList_temp[1];
-   int i = 1;
-   int j = 0;
-   // make sure node_i not equal to node_j
-   while((node_j == node_i) && i< NodeList_temp.size()){
-       i++;
-       node_j = NodeList_temp[i];
-   }
-   if (node_j == node_i){
-       cout<<"Merge to one node"<<endl;
-       vector<int>::iterator it;
-       it = find(NodeList.begin(), NodeList.end(), node_i);
-       while(it!= NodeList.end()){
-           NodeList.erase(it);                                              
-           it = find(NodeList.begin(), NodeList.end(), node_i);
-       }
-       NodeList.push_back(node_i);
-       return;
-   }
-   // merge node as min(node_i, node_j) and 
-   // modify the NodeList so that the repeated node is deleted. 
-   int node_merge = min(node_i, node_j);
-   if(node_i != node_merge){
-       vector<int>::iterator it;
-       it = find(NodeList.begin(), NodeList.end(), node_i);
-       while(it!= NodeList.end()){
-           NodeList.erase(it);
-           it = find(NodeList.begin(), NodeList.end(), node_i);
-       }
-   }
-   else if(node_j != node_merge){
-       vector<int>::iterator it;
-       it = find(NodeList.begin(), NodeList.end(), node_j);
-       while(it!= NodeList.end()){
-           NodeList.erase(it);
-           it = find(NodeList.begin(), NodeList.end(), node_j);             
-       }
-   }
+    for(auto it=edge_visit.begin(); it!=edge_visit.end(); it++){
+        pair<int, int> edge = it->first;
+        cout<<"("<<edge.first<<"->"<<edge.second<<")"<<endl;
+    }
 }
 
-void NodeMerge(vector<vector<int>*>& AdjList,   int node_i, int node_j){
-   /*
-        Choose the edge node_i-> node_j from AdjList, and merge two nodes into one by changing their names to min(node_i, node_j)
-   */
-   int n = AdjList.size();
-   int node_merge = min(node_i, node_j);
-   int i, j;
-   for(i=0; i<n; i++){
-       //search for node_i 
-       if((*AdjList[i])[0] == node_i){
-            //merge given node, erase self-loop
-            vector<int>::iterator it, it2;
-            it = AdjList[i]->begin();
-            it ++ ;
-            it2 = find(it, AdjList[i]->end(), node_j);
-            while(it2!= AdjList[i]->end()){
-                AdjList[i]->erase(it2);
-                it2 = find(it, AdjList[i]->end(), node_j);
-            }
-            // rename the vertex as a common name (min(node_i, node_j))
-            (*AdjList[i])[0] = node_merge;
-       }
-       else{
-           //  rename the end points if node_j is involved
-            for(j=1; j<AdjList[i]->size(); j++){
-                 if((*AdjList[i])[j] == node_j) 
-                     (*AdjList[i])[j] = node_merge;
-            }
-      }
-   }
-   for(i=0; i<n; i++){
-       //search for node_j
-       if((*AdjList[i])[0] == node_j){
-            //merge given node, erase self-loop
-            vector<int>::iterator it, it2;
-            it = AdjList[i]->begin();
-            it ++ ;
-            it2 = find(it, AdjList[i]->end(), node_i);
-            while(it2!= AdjList[i]->end()){
-                AdjList[i]->erase(it2);
-                it2 = find(it, AdjList[i]->end(), node_i);
-            }
-            // rename the vertex as a common name 
-            (*AdjList[i])[0] = node_merge;
-       }
-       else{
-            // rename the end point if the node_i is involved
-            for(j=1; j<AdjList[i]->size(); j++){
-                 if((*AdjList[i])[j] == node_i) 
-                     (*AdjList[i])[j] = node_merge;
-            }
-      }
-   }
-
-}
-
-int CountCrossingEdges(const vector<vector<int>*> AdjList, const int node_i,const int node_j){
-    int i=0;
-    int j=1;
+int unique_pair(const map<pair<int, int>, bool> edge_visit){
     int count = 0;
-    for(i=0; i<AdjList.size(); i++){
-         if(AdjList[i]->at(0) == node_i){
-             for(j=1; j<AdjList[i]->size(); j++){
-                 if(AdjList[i]->at(j) == node_j)
-                     count ++;
-             }
-         }
+    map<pair<int, int>, bool> temp_visit = edge_visit;
+    for(auto it=temp_visit.begin(); it!=temp_visit.end(); it++){
+        pair<int, int> edge = it->first;
+        pair<int, int> edge_re = make_pair(edge.second, edge.first);
+        if(temp_visit[edge] == false || temp_visit[edge_re] == false){
+            temp_visit[edge] = true;
+            temp_visit[edge_re] = true;
+            count ++;
+        }
     }
     return count;
 }
 
-int ComputeCut(vector<vector<int>*> AdjList, vector<int> NodeList, int n){
-   /*
 
-   */
-    unsigned seed = unsigned (time(0)); 
-    if(NodeList.empty() || AdjList.empty()) return 0;
-    if(NodeList.size() == 1) return 0;
-    while(NodeList.size()>2){
-       int node_i = NodeList[0];
-       int node_j = NodeList[1];
-       //Random pick up two nodes in NodeList and merge NodeList
-       EdgePick(NodeList, node_i, node_j, seed);
-       //Merge edges and nodes in AdjList, then delete self-loops 
-       NodeMerge(AdjList, node_i, node_j);
+int rootfind(const int node, const unordered_map<int, int> node_groups){
+    int cur = node;
+    int parent = node_groups.at(node);
+    while(parent != cur){
+        cur = parent;
+        parent = node_groups.at(cur);
     }
-    if(NodeList.size()==2){
-       int node_i = NodeList[0];
-       int node_j = NodeList[1];
-       return CountCrossingEdges(AdjList, node_i, node_j);
+    return cur;
+}
+
+int edgeChange(const unordered_map<int, int> node_groups, map<pair<int, int>, bool>& edge_visit){
+    // delete self-loop that connects both nodes within one group
+    vector<pair<int, int>> drop_list;
+    //map<pair<int, int>, bool> temp;
+    for(auto it=edge_visit.begin(); it!=edge_visit.end(); it++){
+       pair<int, int> edge = it->first;
+       //pair<int, int> edge_re= make_pair(edge.second, edge.first);
+       //if(temp[edge] == true || temp[edge_re] == true) continue;
+       int node0 = edge.first;
+       int node1 = edge.second;
+       int group1 = rootfind(node0, node_groups);
+       int group2 = rootfind(node1, node_groups);
+       //cout<<"node"<<node0<<": group"<<group1<<" node"<<node1<<": group"<<group2<<endl;
+       if(group1 == group2){
+           //drop self-loop
+           //temp[edge] = true;
+           //temp[edge_re] = true;
+           //cout<<"drop self-loop edges" <<endl;
+           drop_list.push_back(edge);
+           //drop_list.push_back(edge_re);
+           //it -- ;
+       }
     }
-    else 
-       return 0;
+    for(auto edge_temp: drop_list){
+       edge_visit.erase(edge_temp);
+    }
+    return drop_list.size();
 }
 
 
-int kargerMinCut(vector<vector<int>*> AdjList, vector<int> NodeList, int n, int& nLoop){
-
-   vector<int> results(nLoop, 0);
-   int i=0;
-   int n_ini = n;
-   vector<vector<int>*> AdjList_ini;
-   vector<int> NodeList_ini;
-   for(i=0; i<nLoop; i++){
-      copy_AdjList(AdjList, NodeList, AdjList_ini, NodeList_ini);
-      n_ini = n;
-      int n_cuts = ComputeCut(AdjList_ini, NodeList_ini, n_ini);
-      results[i] = n_cuts;
-      cout<<"Loop "<<i<<" NumCuts "<<n_cuts<<" "<<endl;
-      clean_AdjList(AdjList_ini, n_ini);
-      AdjList_ini.clear();
-      NodeList_ini.clear();
-   }
-   return *min_element(results.begin(), results.end());
+void nodeMerge(const pair<int, int> edge, unordered_map<int, int>& node_groups){
+    /* 
+        merge two end points as one, delete the redundant node in node_visit
+        by construction, the end point of edge should not all in the same group
+    */
+    int node0 = edge.first;
+    int node1 = edge.second;
+    // search the group that contains node0 and that contains node1
+    //int new_key = min(node_groups[node0], node_groups[node1]);
+    //int remove_key = max(node_groups[node0], node_groups[node1]);
+    int root0 = rootfind(node0, node_groups);
+    int root1 = rootfind(node1, node_groups);
+    int merge_root = max(root0, root1);
+    int add_root = min(root0, root1);
+    node_groups[merge_root] = add_root;
+    //for(auto it= node_groups.begin(); it!= node_groups.end(); it++){
+    //      if(it->second == remove_key){
+    //          it->second = new_key;
+    //      }
+    //}
+    // merge groups
 }
 
 
+pair<int, int> edgeRandPick(map<pair<int, int>, bool>& edge_visit){
+    // choose one edge in the edgeList randomly and remove it from the list
+    
+    //srand(seed);
+    int displacement = rand() % edge_visit.size();
+    int count = 0;
+    auto it = edge_visit.begin();
+    for(count=0; count<displacement; count++){
+        it++;
+    }
+
+    pair<int, int> edge1 = make_pair(it->first.first, it->first.second);
+    pair<int, int> edge2 = make_pair(it->first.second, it->first.first);
+    edge_visit.erase(edge1);     //remove the selected edge
+    edge_visit.erase(edge2);
+    //cout<<"pick ("<<edge1.first<<","<<edge1.second<<") and ("<<edge2.first<<","<<edge2.second<<")"<<endl;
+    if(edge1.first<edge1.second)
+       return edge1;
+    else
+       return edge2;
+}
+
+
+int total_groups(const unordered_map<int, int> node_groups){
+    unordered_set<int> group_number;
+    for(auto it=node_groups.begin(); it!=node_groups.end(); it++){
+        int root = rootfind(it->first, node_groups);
+        if(group_number.empty()) group_number.insert(root);
+        else if(group_number.find(root) == group_number.end()) 
+           group_number.insert(root);
+    }
+    //for(auto i=group_number.begin(); i!=group_number.end(); i++){
+    //     cout<<*i<<" ";
+    //}cout<<endl;
+    return group_number.size();
+}
+
+
+int computeRandCuts(vector<pair<int, int>>& edgeList){
+    /*
+        loop over existing edges when edgeList.size() > 1
+            e= random pick one edge
+            merge(node[e0], node[e1]) into one group
+            delete edge within one group
+        
+    */
+    
+    unordered_map<int, bool> node_visit;
+    edgeList_to_nodeHash(edgeList, node_visit);
+    map<pair<int, int>, bool> edge_visit;
+    edgeList_hash(edgeList, edge_visit);
+    // store the group info for each node
+    // node_groups[node] = parent of this node 
+    unordered_map<int, int> node_groups;
+    for(auto i=node_visit.begin(); i!=node_visit.end(); i++){
+         int node = i->first;
+         node_groups[node] = node;
+    }
+    int total_groups_count = total_groups(node_groups);
+    //cout<<"Total groups "<<total_groups_count<<endl;
+    int count = 0;
+    int total_edge = edgeList.size();
+    while(edge_visit.size()>1 && total_groups_count >2){
+       // ============ a progress bar ==============
+       count = count + 2;
+       double progress = double(count)/double(total_edge);
+       int barWidth = 50;
+       cout<<"[";
+       int pos = barWidth * progress;
+       for(int j=0; j< barWidth; j++){
+            if(j<pos) cout<<"=";
+            else if(j == pos) cout<<">";
+            else cout<<" ";
+       }
+       cout.precision(3);
+       cout<<"]"<<fixed<<int(progress*100.0)<<"%\r";
+       cout.flush();
+       //=====================================================
+
+       //random pick an edge in the edgeList
+       pair<int, int> edge_pick = edgeRandPick(edge_visit);
+       //cout<<"Pick edge ("<<edge_pick.first<<"->"<<edge_pick.second<<")"<<endl;
+       //merge two end nodes into one group in the given edge
+       //cout<<"node merge"<<endl;
+       nodeMerge(edge_pick, node_groups);
+       //merge edges and delete the self loops
+       int count_delta = edgeChange(node_groups, edge_visit); 
+       count = count + count_delta;
+       //show_edges(edge_visit);
+
+       total_groups_count = total_groups(node_groups);
+       //cout<<"Total groups "<<total_groups_count<<endl;
+    }
+    if(total_groups_count != 2){
+       cout<<"Error in computation!"<<endl;
+       return -1;
+    }
+    return unique_pair(edge_visit);
+}
+
+int kargerMinCut(const vector<pair<int, int>> edgeList, int max_loop){
+
+    vector<int> results(max_loop, 0); 
+    int t =0;
+    vector<pair<int, int>> edgeList_t;
+    int n_cuts = 0;
+    for(t=0; t<max_loop; t++){
+        edgeList_t.clear();
+        edgeList_t = edgeList;
+        n_cuts = 0;
+        n_cuts = computeRandCuts(edgeList_t);
+        if(n_cuts == -1){
+            break;
+        }
+        results[t] = n_cuts;
+        cout<<"Loop "<<t<<" NumCuts: "<<n_cuts<<endl;
+    }
+    if(n_cuts == -1){ cout<<"Error!"<<endl; return -1;}
+    return *min_element(results.begin(), results.end());
+}
 
 

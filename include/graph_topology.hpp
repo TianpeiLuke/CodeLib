@@ -2,6 +2,8 @@
 #include <cmath>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
+#include <map>
 #include <algorithm>
 #include <stack>
 #include <queue>
@@ -22,18 +24,19 @@ using namespace std;
 #endif
 
 //karger randomized MinCut 
+int unique_pair(const map<pair<int, int>, bool> edge_visit);
 
+int edgeChange(const unordered_map<int, int> node_groups, map<pair<int, int>, bool>& edge_visit);
 
-void EdgePick(vector<int>& NodeList, int& node_i, int& node_j, unsigned seed);
+void nodeMerge(const pair<int, int> edge, unordered_map<int, int>& node_groups);
 
-void NodeMerge(vector<vector<int>*>& AdjList, int node_i, int node_j);
+pair<int, int> edgeRandPick(map<pair<int, int>, bool>& edge_visit);
 
-int CountCrossingEdges(const vector<vector<int>*> AdjList, const int node_i, const int node_j);
+int total_groups(const unordered_map<int, int> node_groups);
 
-int ComputeCut(vector<vector<int>*> AdjList, vector<int> NodeList, int n);
+int computeRandCuts(vector<pair<int, int>>& edgeList);
 
-int kargerMinCut(vector<vector<int>*> AdjList, vector<int> NodeList, int n, int& nLoop);
-
+int kargerMinCut(const vector<pair<int, int>> edgeList, int max_loop=1000);
 
 
 // strong connected components in directed graph
