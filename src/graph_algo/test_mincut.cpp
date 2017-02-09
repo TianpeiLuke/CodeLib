@@ -2,9 +2,24 @@
 #include "../../include/graph_construct.hpp"
 
 int main(int argc, const char * argv[]){
+   bool test = true;
+   if(argc< 4)
+       test = true;
+   else
+       test = bool(stoi(argv[3], NULL, 10));
    
-   string filename = argv[1];
-   bool test = bool(strtol(argv[2], NULL, 10));
+   int nLoop = 20;
+   if(argc < 3)
+       nLoop = 20;
+   else    
+       nLoop = stoi(argv[2], nullptr, 10);
+
+   string filename;
+   if(argc<2)
+      filename = "../../data/kargerMinCut.txt";
+   else
+      filename = argv[1];
+
    if(!test){
        cout<<"Read file "<<filename<<"..."<<endl;
        //vector<vector<int>*> AdjList;
@@ -25,7 +40,7 @@ int main(int argc, const char * argv[]){
        //read_AdjList(filename, AdjList, NodeList, n);
        cout<<"Number of vertices: "<<adjList.size()<<endl;
        cout<<"Compute Min-Cut"<<endl;
-       int nLoop = 1000;
+       int nLoop = 23;
        int min_cut = 0;
        min_cut = kargerMinCut(edgeList, nLoop);
        cout<<"Final result: "<<endl;
@@ -64,7 +79,7 @@ int main(int argc, const char * argv[]){
        cout<<"Number of vertices: "<<adjList.size()<<endl;
        show_edgeList(edgeList);
        cout<<"Compute Min-Cut"<<endl;
-       int nLoop = 10000;
+       int nLoop = 50;
        int min_cut = 0;
        min_cut = kargerMinCut(edgeList, nLoop);
        cout<<"Final result: "<<endl;

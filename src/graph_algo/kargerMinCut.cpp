@@ -26,6 +26,8 @@ int unique_pair(const map<pair<int, int>, bool> edge_visit){
 
 
 int rootfind(const int node, const unordered_map<int, int> node_groups){
+    //find the root of given node, a unique value for each group
+    // takes  O(height) 
     int cur = node;
     int parent = node_groups.at(node);
     while(parent != cur){
@@ -45,6 +47,7 @@ int edgeChange(const unordered_map<int, int> node_groups, map<pair<int, int>, bo
        //if(temp[edge] == true || temp[edge_re] == true) continue;
        int node0 = edge.first;
        int node1 = edge.second;
+       //bottleneck
        int group1 = rootfind(node0, node_groups);
        int group2 = rootfind(node1, node_groups);
        //cout<<"node"<<node0<<": group"<<group1<<" node"<<node1<<": group"<<group2<<endl;
@@ -73,13 +76,13 @@ void nodeMerge(const pair<int, int> edge, unordered_map<int, int>& node_groups){
     int node0 = edge.first;
     int node1 = edge.second;
     // search the group that contains node0 and that contains node1
-    //int new_key = min(node_groups[node0], node_groups[node1]);
-    //int remove_key = max(node_groups[node0], node_groups[node1]);
+    // bottleneck
     int root0 = rootfind(node0, node_groups);
     int root1 = rootfind(node1, node_groups);
     int merge_root = max(root0, root1);
+    // take union of two groups
     int add_root = min(root0, root1);
-    node_groups[merge_root] = add_root;
+    node_groups[merge_root] = add_root; //ask the root of one tree point to the root of the other tree
     //for(auto it= node_groups.begin(); it!= node_groups.end(); it++){
     //      if(it->second == remove_key){
     //          it->second = new_key;
@@ -186,6 +189,7 @@ int computeRandCuts(vector<pair<int, int>>& edgeList){
        cout<<"Error in computation!"<<endl;
        return -1;
     }
+    cout<<endl;
     return unique_pair(edge_visit);
 }
 
@@ -204,6 +208,7 @@ int kargerMinCut(const vector<pair<int, int>> edgeList, int max_loop){
             break;
         }
         results[t] = n_cuts;
+        cout.flush();
         cout<<"Loop "<<t<<" NumCuts: "<<n_cuts<<endl;
     }
     if(n_cuts == -1){ cout<<"Error!"<<endl; return -1;}
