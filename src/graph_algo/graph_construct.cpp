@@ -5,7 +5,7 @@
 
 //==================================================
 
-bool Graph_load(string filename, vector<vector<int>>& adjList, unordered_map<int, int>& nodeloc ){
+bool Graph_load_edge(string filename, vector<vector<int>>& adjList, unordered_map<int, int>& nodeloc ){
 /*
     Load edgeList from txt file
     each row is a directed edge [source target] or [tail head]
