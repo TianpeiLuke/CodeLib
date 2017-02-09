@@ -3,6 +3,11 @@
 
 
 int main(int argc, char* argv[]){
+   bool verbose = false;
+   if(argc<3)
+      verbose = false;
+   else
+      verbose = bool(stoi(argv[2], NULL, 10));
 
    string filename;
    if(argc<2) 
@@ -10,33 +15,30 @@ int main(int argc, char* argv[]){
    else
       filename = argv[1];
 
-   vector<vector<int>> adjList;
-   unordered_map<int, int > nodeloc;
-   unordered_map<int, int > nodeIdxMap;
-   vector<int> SCC_size;
+   unordered_map<int, vector<int>> adjList;
+   unordered_map<int, bool> visited;
+   vector<pair<int, int>> SCC_re;
    //cout<<"Load edge list from "<<filename<<endl;
-   if(!Graph_load_edge(filename, adjList, nodeloc)){
+   if(!Graph_load_edges(filename, adjList, visited)){
        cerr<<"corrupted file"<<endl;
        return -1;
    }
-   int verbose = 0;
-   if(verbose == 1){
-      for(int i=0; i<adjList.size(); i++){
-         for(int j=0; j<adjList[i].size(); j++){
-            cout<<adjList[i][j]<<" ";
-         }
-         cout<<endl;
-      }
+   if(verbose){
+         show_AdjList(adjList);
    }
    // 
    cout<<"Compute the strong connected components"<<endl;
-   SCC(adjList, nodeloc, SCC_size, verbose);
+   SCC_re = SCC(adjList, visited, verbose);
    
   
    vector<int> answer;
-   answer = {434821, 968, 459, 313, 211}
+   answer = {434821, 968, 459, 313, 211};
    bool is_equal  = false;
-   is_equal = equal(SCC_size.begin(), SCC_size.begin()+5, answer.begin());
+   vector<int> result;
+   for(auto it=SCC_re.begin(); it!=SCC_re.end(); it++){
+        result.push_back(it->second);
+   }
+   is_equal = equal(result.begin(), result.begin()+5, answer.begin());
    if(is_equal) cout<<"Correct answer !"<<endl;
    else cout<<"Wrong answer !"<<endl;
 

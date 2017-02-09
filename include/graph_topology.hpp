@@ -40,12 +40,20 @@ int kargerMinCut(const vector<pair<int, int>> edgeList, int max_loop=1000);
 
 
 // strong connected components in directed graph
-void SCC(vector<vector<int>> adjList, unordered_map<int, int> nodeloc, vector<int>& SCC_size, int verbose);
+bool any_nonvisited(const unordered_map<int, bool> visited, int& root);
 
-void depth_first_SCC(vector<vector<int>> adjList, int root, vector<bool>& visited, vector<int>& finishing_time, vector<int>&leader,  unordered_map<int, int>& nodeIdxMap );
+vector<pair<int,int>> SCC(unordered_map<int, vector<int>> adjList, unordered_map<int, bool> visited, bool verbose);
+
+void dfs_first_SCC(const unordered_map<int, vector<int>> adjList, int root, unordered_map<int, bool>& visited, unordered_map<int, int>& finishing_time, unordered_map<int, int>&leader);
+
+void dfs_second_SCC(const unordered_map<int, vector<int>> adjList, int root, unordered_map<int, bool>&visited, vector<pair<int, int>>&SCC, unordered_map<int, int>& leader);
+
+//void SCC(vector<vector<int>> adjList, unordered_map<int, int> nodeloc, vector<int>& SCC_size, int verbose);
+
+//void depth_first_SCC(vector<vector<int>> adjList, int root, vector<bool>& visited, vector<int>& finishing_time, vector<int>&leader,  unordered_map<int, int>& nodeIdxMap );
 
 
-void depth_second_SCC(const vector<vector<int>> adjList, const unordered_map<int, int> nodeIdxMap, const vector<int> finishing_time, vector<int>& leader, vector<int>& SCC_size, vector<bool>& visited);
+//void depth_second_SCC(const vector<vector<int>> adjList, const unordered_map<int, int> nodeIdxMap, const vector<int> finishing_time, vector<int>& leader, vector<int>& SCC_size, vector<bool>& visited);
 
 // union find and number of island
 

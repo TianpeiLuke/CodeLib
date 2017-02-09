@@ -67,6 +67,62 @@ bool Graph_load_edge(string filename, vector<vector<int>>& adjList, unordered_ma
 }
 
 
+bool Graph_load_edges(string filename, unordered_map<int, vector<int>>& adjList, unordered_map<int, bool>& visited){
+/*
+    Load edgeList from txt file
+    each row is a directed edge [source target] or [tail head]
+    
+*/
+    ifstream infile(filename);
+    if(!adjList.empty()) adjList.clear();
+    // vector<int> nodeloc;
+    visited.clear();
+    cout<<"Load edge list from "<<filename<<endl;
+    int total_source_size = 0; 
+    while(infile){
+        string line;
+        if(!getline(infile, line)) break;
+
+        istringstream ss(line);
+        vector<int> record;
+        int vertexIdx = -1;
+        int vertexLoc = -1;
+        int temp;
+        while(ss >> temp){
+           //cout<<temp<<" ";
+           record.push_back(temp);
+        }//cout<<endl;
+        // store the source node
+        try{
+           //bool visit = visited.at(record[0]);
+           // add the target node
+           adjList.at(record[0]).push_back(record[1]);
+        }catch(const std::out_of_range& oor){
+           visited[record[0]] = false;
+           vector<int> new_row; // a new row
+           new_row.push_back(record[1]);
+           adjList[record[0]] = new_row;
+        }
+
+        try{
+           bool trial = visited.at(record[1]);
+           // add the target node
+           // adjList[vertexLoc].push_back(record[1]);
+        }catch(const std::out_of_range& oor){
+           visited[record[1]] = false;
+           vector<int> new_row2; // a new row
+           //new_row.push_back(record[1]);
+           adjList[record[1]] = new_row2;
+        }
+    }
+    if(!infile.eof()){
+       cerr<<"Corrupted file!"<<endl;
+       return false;
+    }
+    cout<<"Total number of rows in adjList: "<<adjList.size()<<endl;
+    return true;
+}
+
 
 void Graph_reverse(const vector<vector<int>> adjList, const unordered_map<int, int> nodeloc,  vector<vector<int>>& adjList_reverse){
 
