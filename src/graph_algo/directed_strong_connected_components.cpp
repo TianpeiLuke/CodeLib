@@ -12,13 +12,26 @@ void dfs_first_SCC(const unordered_map<int, vector<int>> adjList, int root, unor
     if(verbose){ 
        cout<<"Depth-First-Search (reversed graph)"<<endl;
     }
-    stack<int> nodeStack;     // used for depth-first-search
-    stack<int> reverseStack;  // used to compute the reverse ordering of the node visited by DFS
-
     int leaderSCC = root;     // set the leader of SCC as the root of the new DFS 
     int cur_node;
     int count_size = 0;
     int outdegree = 0;
+    int reverse_node;
+    int root_time = finishing_time.size(); //using repeatedly 
+
+    // sink node
+    if(adjList.at(root).empty()){
+       visited[root] = true;
+       root_time ++;
+       leader[root] = root;
+       finishing_time[root] = root_time;
+       return;
+    }
+
+
+    stack<int> nodeStack;     // used for depth-first-search
+    stack<int> reverseStack;  // used to compute the reverse ordering of the node visited by DFS
+
     nodeStack.push(root);
     while(!nodeStack.empty()){
         count_size ++;
@@ -38,8 +51,6 @@ void dfs_first_SCC(const unordered_map<int, vector<int>> adjList, int root, unor
                 nodeStack.push(target);
         }
     }
-    int reverse_node;
-    int root_time = finishing_time.size(); //using repeatedly 
     while(!reverseStack.empty()){
         reverse_node = reverseStack.top();
         root_time ++ ;      // count the reverse ordering
@@ -65,12 +76,21 @@ void dfs_second_SCC(const unordered_map<int, vector<int>> adjList, const int roo
          
     */
     if(verbose) cout<<"Depth-First-Search (origin graph)"<<endl;
-    stack<int> nodeStack;
     int SCC_count = 0;
     int leaderSCC = root;     // set the leader of SCC as the root of the new DFS 
     int outdegree = 0;
     int cur_node;
+    
+    if(adjList.at(root).empty()){
+       visited[root] = true;
+       SCC_count ++;
+       leader[root] = root;
+       SCC.push_back(make_pair(root, SCC_count));
+       return;
+    }
+
     //dfs
+    stack<int> nodeStack;
     nodeStack.push(root);
     while(!nodeStack.empty()){
         // pop the top of the stack
@@ -160,8 +180,17 @@ vector<pair<int,int>> SCC(unordered_map<int, vector<int>> adjList, unordered_map
        cout<<"Compute finishing_time from reverse graph..."<<endl;
        int count_dfs1 = 1;
        if(verbose) cout<<"Loop "<<count_dfs1<<endl; 
-       dfs_first_SCC(adjList_reverse, root, visited_copy, finishing_time, leader, verbose);
-  
+
+       // if is sink node in reverse graph, process directly 
+       int root_time = finishing_time.size();
+       if(adjList_reverse.at(root).empty()){
+           visited_copy[root] = true;
+           root_time ++;
+           leader[root] = root;
+           finishing_time[root] = root_time;
+       }else{
+           dfs_first_SCC(adjList_reverse, root, visited_copy, finishing_time, leader, verbose);
+       }
        //================ progress bar =============================
        int count_v = count_visited(visited_copy);
        float progress = float(count_v)/float(visited_copy.size());
@@ -181,14 +210,22 @@ vector<pair<int,int>> SCC(unordered_map<int, vector<int>> adjList, unordered_map
            std::cout.flush();
 
            //=================================================================
-           dfs_first_SCC(adjList_reverse, root, visited_copy, finishing_time, leader, verbose);
+           // process sink node directly, not to call function
+           root_time = finishing_time.size();
+           if(adjList_reverse.at(root).empty()){
+               visited_copy[root] = true;
+               root_time ++;
+               leader[root] = root;
+               finishing_time[root] = root_time;
+           }else{
+               dfs_first_SCC(adjList_reverse, root, visited_copy, finishing_time, leader, verbose);
+           }
            //================================================================
            count_v = count_visited(visited_copy);
            progress = float(count_v)/float(visited_copy.size());
        }
        // run dfs on original graph at second time, find the SCC
        cout<<endl<<"Compute SCC ..."<<endl;
-       cout<<endl;
        SCC.clear();
        leader.clear();
        for(auto it=visited_copy.begin(); it!=visited_copy.end(); it++){
@@ -232,7 +269,14 @@ vector<pair<int,int>> SCC(unordered_map<int, vector<int>> adjList, unordered_map
            std::cout << "] " << int(progress * 100.0) << " % "<<" Loop "<<count_dfs2<<"\r";
            std::cout.flush();
            //========================================================
-           dfs_second_SCC(adjList, root_second, visited_copy, SCC, leader, verbose);
+           // process sink node in origin graph directly 
+           if(adjList.at(root_second).empty()){
+               visited_copy[root_second] = true;
+               leader[root_second] = root_second;
+               SCC.push_back(make_pair(root_second, 1));
+           }else{
+               dfs_second_SCC(adjList, root_second, visited_copy, SCC, leader, verbose);
+           }
            //choose a root that is not visited
            elem = finishing_vec.back();
            root_second = elem.first;
