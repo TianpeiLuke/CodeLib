@@ -38,5 +38,14 @@ int main(int argc, char* argv[]){
     if(depth_first_search(adjList, root, target, visited))
         cout<<"Find a path from "<<root<<" to "<<target<<endl;
     else cout<<"No path available from "<<root<<" to "<<target<<endl;
+    
+    // clear visited
+    for(auto it=visited.begin(); it!=visited.end(); it++){
+         it->second = false;
+    }
+
+    if(breadth_first_search(adjList, root, target, visited))
+        cout<<"Find a path from "<<root<<" to "<<target<<endl;
+    else cout<<"No path available from "<<root<<" to "<<target<<endl;
     return 0;
 }

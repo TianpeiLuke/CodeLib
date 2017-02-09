@@ -1,5 +1,70 @@
 #include "../../include/graph_search.hpp"
 
+void depth_first_traverse(const unordered_map<int, vector<int>> adjList, int root, unordered_map<int, bool>& visited){
+     /*
+        perform DPS using backtracking
+    */
+    if(root == -1) cerr<<"The root node does not exist !"<<endl;
+
+    cout<<"Depth-First-Search"<<endl;
+    stack<int> nodeStack;
+    int outdegree = 0;
+    nodeStack.push(root);
+    while(!nodeStack.empty()){
+         // pop the top of the stack
+        int cur_node = nodeStack.top();
+        visited[cur_node] = true;
+        cout<<"Node "<<cur_node<<" visited"<<endl;
+        nodeStack.pop();
+        vector<int> targetList = adjList.at(cur_node);
+        outdegree = targetList.size();
+        // push all non-visited children into the stack
+        if(outdegree == 0) continue;
+        for(auto target: targetList){
+            if (visited[target] == false)
+                nodeStack.push(target);
+        }
+    }
+    cout<<"Finishing traversing. "<<endl;
+}
+
+bool depth_first_search(const unordered_map<int, vector<int>> adjList, int root, int target, unordered_map<int, bool>& visited){
+     /*
+        perform DPS using backtracking
+    */
+    if(root == -1) cerr<<"The root node does not exist !"<<endl;
+
+    cout<<"Depth-First-Search"<<endl;
+    stack<int> nodeStack;
+    int outdegree = 0;
+    bool result = false;
+    int cur_node;
+    nodeStack.push(root);
+    while(!nodeStack.empty()){
+         // pop the top of the stack
+        cur_node = nodeStack.top();
+        visited[cur_node] = true;
+        cout<<"Node "<<cur_node<<" visited"<<endl;
+        nodeStack.pop();
+        if(cur_node == target){
+            result = true;
+            break;
+        }
+        vector<int> targetList = adjList.at(cur_node);
+        outdegree = targetList.size();
+        // push all non-visited children into the stack
+        if(outdegree == 0) continue;
+        for(auto target: targetList){
+            if (visited[target] == false)
+                nodeStack.push(target);
+        }
+    }
+    return result;
+}
+
+
+
+
 
 //void depth_first_traverse_basic(const vector<vector<int>> adjList, int root, vector<bool>& visited, const unordered_map<int, int> nodeIdxMap){
 //    /*
@@ -165,70 +230,5 @@
 //}
 
 //=======================================================
-
-
-void depth_first_traverse(const unordered_map<int, vector<int>> adjList, int root, unordered_map<int, bool>& visited){
-     /*
-        perform DPS using backtracking
-    */
-    if(root == -1) cerr<<"The root node does not exist !"<<endl;
-
-    cout<<"Depth-First-Search"<<endl;
-    stack<int> nodeStack;
-    int outdegree = 0;
-    nodeStack.push(root);
-    while(!nodeStack.empty()){
-         // pop the top of the stack
-        int cur_node = nodeStack.top();
-        visited[cur_node] = true;
-        cout<<"Node "<<cur_node<<" visited"<<endl;
-        nodeStack.pop();
-        vector<int> targetList = adjList.at(cur_node);
-        outdegree = targetList.size();
-        // push all non-visited children into the stack
-        if(outdegree == 0) continue;
-        for(auto target: targetList){
-            if (visited[target] == false)
-                nodeStack.push(target);
-        }
-    }
-    cout<<"Finishing traversing. "<<endl;
-}
-
-bool depth_first_search(const unordered_map<int, vector<int>> adjList, int root, int target, unordered_map<int, bool>& visited){
-     /*
-        perform DPS using backtracking
-    */
-    if(root == -1) cerr<<"The root node does not exist !"<<endl;
-
-    cout<<"Depth-First-Search"<<endl;
-    stack<int> nodeStack;
-    int outdegree = 0;
-    bool result = false;
-    int cur_node;
-    nodeStack.push(root);
-    while(!nodeStack.empty()){
-         // pop the top of the stack
-        cur_node = nodeStack.top();
-        visited[cur_node] = true;
-        cout<<"Node "<<cur_node<<" visited"<<endl;
-        nodeStack.pop();
-        if(cur_node == target){
-            result = true;
-            break;
-        }
-        vector<int> targetList = adjList.at(cur_node);
-        outdegree = targetList.size();
-        // push all non-visited children into the stack
-        if(outdegree == 0) continue;
-        for(auto target: targetList){
-            if (visited[target] == false)
-                nodeStack.push(target);
-        }
-    }
-    return result;
-}
-
-
 
 
