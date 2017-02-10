@@ -23,7 +23,7 @@ def read_file(filename):
 def write_to_txt(filename, edgeList):
     with open(filename, 'w') as f:
         for edge in edgeList:
-           f.write("%s %s %s", (edge[0], edge[1], edge[2]))
+           f.write("{} {} {}".format(edge[0], edge[1], edge[2]))
 
 def build_graph(filename):
     G = nx.read_weighted_edgelist(filename, nodetype=int)
@@ -38,10 +38,10 @@ def path_single_source_dijkstra(G, source):
 if __name__ == '__main__':
  
    fileData = "../../data/dijkstraData.txt"
-   fileList = "../../data/dijkstraEdgelist.txt"
+   fileList = "../../data/dijkstraEdgeList.txt"
 
    edgeList= read_file(fileData)
-   write_to_txt(fileList, edgeList)
+   #write_to_txt(fileList, edgeList)
    
    G = build_graph(fileList)
 

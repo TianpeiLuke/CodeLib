@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <map>
+#include <set>
 #include <algorithm>
 #include <stack>
 #include <queue>
@@ -14,6 +15,7 @@
 #include <ctime>
 #include <cmath>
 #include <cstdlib>
+#include <climits>
 
 #ifndef _GRAPH_TOPOLOGY
 #define _GRAPH_TOPOLOGY
@@ -48,12 +50,11 @@ void dfs_first_SCC(const unordered_map<int, vector<int>> adjList, int root, unor
 
 void dfs_second_SCC(const unordered_map<int, vector<int>> adjList, const int root, unordered_map<int, bool>&visited, vector<pair<int, int>>&SCC, unordered_map<int, int>& leader, bool verbose);
 
-//void SCC(vector<vector<int>> adjList, unordered_map<int, int> nodeloc, vector<int>& SCC_size, int verbose);
 
-//void depth_first_SCC(vector<vector<int>> adjList, int root, vector<bool>& visited, vector<int>& finishing_time, vector<int>&leader,  unordered_map<int, int>& nodeIdxMap );
+// dijkstra's algorithm
+void dijkstra(const unordered_map<int, vector<int>> adjList, const unordered_map<int, vector<int>> weights, unordered_map<int, bool>& visited,  int source, unordered_map<int, int>& min_path);
 
-
-//void depth_second_SCC(const vector<vector<int>> adjList, const unordered_map<int, int> nodeIdxMap, const vector<int> finishing_time, vector<int>& leader, vector<int>& SCC_size, vector<bool>& visited);
+void dijkstra_routine(const unordered_map<int, vector<int>> adjList, const unordered_map<int, vector<int>> weights,  unordered_map<int, bool>& visited, vector<pair<int,int>>& nodeHeap, unordered_map<int, int>& min_path);
 
 // union find and number of island
 

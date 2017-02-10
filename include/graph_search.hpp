@@ -21,27 +21,11 @@ using namespace std;
 #endif
 // breadth_first_search
 
-//void breadth_first_traverse(vector<vector<int>> adjList, int root, vector<bool>& visited, unordered_map<int, int>& nodeIdxMap );
-
-
-//void breadth_first_search(vector<vector<int>> adjList, int root, int target, vector<bool>& visited, unordered_map<int, int>& nodeIdxMap );
-
 void breadth_first_search(unordered_map<int, vector<int>> adjList, int root, unordered_map<int, bool>& visited);
 
 bool breadth_first_search(unordered_map<int, vector<int>> adjList, int root, int target, unordered_map<int, bool>& visited);
 
 // depth_first_search
-
-//void depth_first_traverse_basic(vector<vector<int>>& adjList, int& root, vector<bool>& visited, unordered_map<int, int>& nodeIdxMap );
-
-//bool depth_first_search_basic(const vector<vector<int>> adjList, int root, int target, vector<bool>& visited, unordered_map<int, int>& nodeIdxMap );
-
-//void depth_first_traverse(vector<vector<int>> adjList, int root, vector<bool>& visited, unordered_map<int, int>& nodeIdxMap );
-
-
-//bool depth_first_search(vector<vector<int>> adjList, int root, int target, vector<bool>& visited, unordered_map<int, int>& nodeIdxMap );
-
-//=========================================================
 
 void depth_first_traverse(const unordered_map<int, vector<int>> adjList, int root, unordered_map<int, bool>& visited);
 

@@ -38,6 +38,9 @@ bool Graph_load_edges(string filename, unordered_map<int, vector<int>>& adjList,
 
 bool Graph_load(string filename, unordered_map<int, vector<int>>& adjList, unordered_map<int, bool>& node_visit);
 
+bool Graph_load_weights(string filename, unordered_map<int, vector<int>>& adjList, unordered_map<int, vector<int>>& weights, unordered_map<int, bool>& node_visit);
+
+
 void Graph_reverse(const unordered_map<int, vector<int>> adjList, unordered_map<int, vector<int>>& adjList_reverse);
 
 void show_AdjList(const unordered_map<int, vector<int>> adjList);
