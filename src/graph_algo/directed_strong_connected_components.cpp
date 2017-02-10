@@ -1,6 +1,24 @@
 #include "../../include/graph_construct.hpp"
 #include "../../include/graph_topology.hpp"
 
+bool is_sink(const unordered_map<int, vector<int>> adjList, int root){
+     return (adjList.at(root).empty());
+}
+
+bool is_single_unvisited(const unordered_map<int, vector<int>> adjList, const unordered_map<int, bool> visited, int root){
+     // see if all children are visited
+     if(is_sink) return true;
+     bool result = true;
+     for(auto target: adjList.at(root)){
+          if(visited.at(target) == false){
+               result = false;
+               return result;
+          }
+     }
+     return result;
+}
+
+
 void dfs_first_SCC(const unordered_map<int, vector<int>> adjList, int root, unordered_map<int, bool>& visited, unordered_map<int, int>& finishing_time, unordered_map<int, int>& leader, bool verbose=false){
     /*
          The DFS algorithm for the first round of SCC
@@ -20,14 +38,25 @@ void dfs_first_SCC(const unordered_map<int, vector<int>> adjList, int root, unor
     int root_time = finishing_time.size(); //using repeatedly 
 
     // sink node
-    if(adjList.at(root).empty()){
+    if(is_sink(adjList, root)){
        visited[root] = true;
        root_time ++;
        leader[root] = root;
        finishing_time[root] = root_time;
        return;
     }
-
+    if(adjList.at(root).size()==1){
+       int child = adjList.at(root)[0];
+       if(is_sink(adjList, child)){
+          visited[child] = true;
+          visited[root] = true;
+          root_time ++;
+          finishing_time[child] = root_time;
+          root_time ++;
+          finishing_time[root] = root_time;
+          return;
+       }
+    }
 
     stack<int> nodeStack;     // used for depth-first-search
     stack<int> reverseStack;  // used to compute the reverse ordering of the node visited by DFS
@@ -81,13 +110,26 @@ void dfs_second_SCC(const unordered_map<int, vector<int>> adjList, const int roo
     int outdegree = 0;
     int cur_node;
     
-    if(adjList.at(root).empty()){
+    if(is_sink(adjList,root)){
        visited[root] = true;
        SCC_count ++;
        leader[root] = root;
        SCC.push_back(make_pair(root, SCC_count));
        return;
     }
+
+    if(adjList.at(root).size()==1){
+       int child = adjList.at(root)[0];
+       if(is_sink(adjList, child)){
+           visited[root] = true;
+           visited[child] = true;
+           leader[root] = root;
+           leader[child] = root;
+           SCC.push_back(make_pair(root, 2));
+           return;
+       }
+    }
+
 
     //dfs
     stack<int> nodeStack;
@@ -183,12 +225,13 @@ vector<pair<int,int>> SCC(unordered_map<int, vector<int>> adjList, unordered_map
 
        // if is sink node in reverse graph, process directly 
        int root_time = finishing_time.size();
-       if(adjList_reverse.at(root).empty()){
+       if(is_sink(adjList_reverse, root)){
            visited_copy[root] = true;
            root_time ++;
-           leader[root] = root;
+           //leader[root] = root;
            finishing_time[root] = root_time;
-       }else{
+       }
+       else{
            dfs_first_SCC(adjList_reverse, root, visited_copy, finishing_time, leader, verbose);
        }
        //================ progress bar =============================
@@ -212,12 +255,13 @@ vector<pair<int,int>> SCC(unordered_map<int, vector<int>> adjList, unordered_map
            //=================================================================
            // process sink node directly, not to call function
            root_time = finishing_time.size();
-           if(adjList_reverse.at(root).empty()){
+           if(is_sink(adjList_reverse, root)){
                visited_copy[root] = true;
                root_time ++;
-               leader[root] = root;
+               //leader[root] = root;
                finishing_time[root] = root_time;
-           }else{
+           }//process link to sink node
+           else{
                dfs_first_SCC(adjList_reverse, root, visited_copy, finishing_time, leader, verbose);
            }
            //================================================================
@@ -270,11 +314,24 @@ vector<pair<int,int>> SCC(unordered_map<int, vector<int>> adjList, unordered_map
            std::cout.flush();
            //========================================================
            // process sink node in origin graph directly 
-           if(adjList.at(root_second).empty()){
+           if(is_sink(adjList, root_second)){
                visited_copy[root_second] = true;
                leader[root_second] = root_second;
                SCC.push_back(make_pair(root_second, 1));
-           }else{
+           }// process single link to sink node
+           else if(adjList.at(root_second).size()==1){
+               int child = adjList.at(root_second)[0];
+               if(is_sink(adjList, child)){
+                   visited[root_second] = true;
+                   visited[child] = true;
+                   leader[root_second] = root_second;
+                   leader[child] = root_second;
+                   SCC.push_back(make_pair(root_second, 2));
+               }else
+                   dfs_second_SCC(adjList, root_second, visited_copy, SCC, leader, verbose);
+          
+           }
+           else{
                dfs_second_SCC(adjList, root_second, visited_copy, SCC, leader, verbose);
            }
            //choose a root that is not visited
