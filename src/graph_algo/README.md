@@ -60,6 +60,6 @@ This subsection implements a set of graph-based algorithms. It consists of three
        `../../bin/test_dijkstra "../../data/dijkstraData.txt"`
 
 
-   5. __Kruskal's algorithm__ in __minimal-spanning-tree__ 
+   5. __Kruskal's algorithm__ in __minimal-spanning-tree (MST)__ 
 
-      Implementation using __disjoint-set data structure__.  
+      Kruskal's algorithm for MST is a __greedy algorithm__. Implementation using __disjoint-set data structure__.  
