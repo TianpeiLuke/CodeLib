@@ -33,19 +33,24 @@ This subsection includes several hard problems that have fast implementation bas
 
 ## Examples 
 
-  1. Finding the maximum sum of subarray 
+  1. Finding the __maximum sum of subarray__ 
   
-   From an array of numbers, find a contiguous subarray with maximum sum. This problem can be solved in divide-and-conquer with O(n\log(n)) time complexity, but using dynamic programming, we can solve it in O(n) time complexity with an additional O(n) space complexity. 
+   From an array of numbers, find a __contiguous subarray with maximum sum__. This problem can be solved in divide-and-conquer with O(n\log(n)) time complexity, but using dynamic programming, we can solve it in O(n) time complexity with an additional O(n) space complexity. 
 
 
-  2. Edit distance 
+  2. __Edit distance__
  
-   Finding how many operations (insertion, deletion, substitution) needed to tranform one string to another string. Naive implementation with O(2^n) time complexity with recursion. The dynamic programming reduce it to O(mn) time complexity and O(mn) space complexity (can be O(min(m,n))), with m,n are size of two strings, respectively. 
+   Finding how many operations (insertion, deletion, substitution) __at least__ needed to tranform one string to another string. Naive implementation with O(2^n) time complexity with recursion. The dynamic programming reduce it to O(mn) time complexity and O(mn) space complexity (can be O(min(m,n))), with m,n are size of two strings, respectively. 
 
 
-  3. Finding the longest common subsquences
+  3. Finding the __longest common subsquences__
 
-   Want to find the maximum length of common subsequence in both strings. Naive implementation requires O(2^(m+n)) time complexity. The dynamic programming requires O(m+n) time complexity with O(mn) space complexity.
+   Want to find the __maximum length of common subsequence__ in both strings. Naive implementation requires O(2^(m+n)) time complexity. The dynamic programming requires O(m+n) time complexity with O(mn) space complexity.
 
+ 
+  4. __Optimal binaray search tree (BST)__
 
+   Given additional information for each key value (tree node) including the __ranking__ of the key, (e.g. probability of appearence of each key).
+
+   Want to construct a BST whose __expected cost of searching is minimized__, where the cost is a _weighted sum_ of the __depth__ of each key value and the weights are _ranking weights_.
     
