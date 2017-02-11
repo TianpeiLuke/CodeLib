@@ -53,13 +53,18 @@ The __comparison-based sorting__ algorithms do __not have direct access to the v
   
    When additional assumptions are made on the __values__ of the elements in unsorted array, the sorting algorithm is __non-comparison based__.
 
+  1. __countingSort__
 
-  1. __bucketSort__
+   An __integer__ sorting algorithm. an non-comparative sorting. Count a __histogram__ that record the __number of occurance for each integers__ in the unsorted array.
+
+     
+
+  2. __bucketSort__
 
    A __distribution sort__. Requires data values are __bounded__.  In essence, construct a __histogram__ of data values. 
 
 
-  2. __radixSort__
+  3. __radixSort__
 
    A _non-comparative_ __integer__ sorting algorithm. Sort data with __integer keys__ by __grouping keys__ by individual digits which __share the same significant position and value__. 
 
