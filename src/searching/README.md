@@ -25,7 +25,7 @@ A __binary search tree (BST)__ contains a struct `BST_Node`, each tree node cont
 
 2. __Backtracking__
 
-   Commonly implemented in __recursive version__. In this code, implemented with a __stack__ of node-path and a __hash table__ of visited nodes. Backtracking implements a DFS-style traverse across the entire space. Also used in enumeration of all possible combination of components.  
+   A naive enumeration strategy when the process involves multiple steps, each has multiple choices. Commonly implemented in __recursive version__. In this code, implemented with a __stack__ of node-path and a __hash table__ of visited nodes. Backtracking implements a DFS-style traverse across the entire space. Also used in enumeration of all possible combination of components.  
    
    Advantages for __recursive__ mode is that it is easy to code. The __disadvantages__ is that _repeated function calls_ waste time. Also for some applications, the DFS-based backtracking would go __too deep__ so that the system stack __overflow__. 
 
