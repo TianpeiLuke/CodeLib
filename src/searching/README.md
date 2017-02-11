@@ -26,6 +26,15 @@ A __binary search tree (BST)__ contains a struct `BST_Node`, each tree node cont
 2. __Backtracking__
 
    Implemented with a stack of node-path and a hash table of visited nodes. Backtracking implements a DFS-style traverse across the entire space. 
+  
+   1. Sudoku
+
+
+   2. All paths in a graph 
+
+
+   3. All subsets 
+
 
 3. __Augmented BST and kth-order Statistics__
 
