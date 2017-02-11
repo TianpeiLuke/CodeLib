@@ -46,7 +46,7 @@ Find the max/min value takes $O(1)$ time, while `pop` and `push` takes $O(\log(n
 
 1. __Heap Sort__
 
-   A heap sort takes $O(n\log(n))$. It is a version of __comparison-based sorting__. 
+   A heap sort takes O(n log(n)). It is a version of __comparison-based sorting__. 
 
 
 2. __Median of Streaming data__
@@ -55,7 +55,7 @@ Find the max/min value takes $O(1)$ time, while `pop` and `push` takes $O(\log(n
 
    Note that if the size of two heaps are not balanced, pop the top elements in one heap and push into the other heap. 
 
-   In total, takes $O(n\log(n))$ times with $O(n)$ space. 
+   In total, takes O(n log(n)) times with O(n) space. 
 
 3. __kth-order statistics in Streaming data__
 
