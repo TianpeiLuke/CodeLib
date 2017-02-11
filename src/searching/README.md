@@ -8,13 +8,13 @@ There are two main data strcutures in searching:
 
 A __binary search tree (BST)__ contains a struct `BST_Node`, each tree node contains a `key` and two children. The basic rule for BST is that the keys for _all left sub-tree are less than the root_, and _the keys for all right sub-tree are greater than the root_. 
 
-1. Pre-order Traversal, In-order Traversal, Post-order Traversal
+1. __Pre-order Traversal__, __In-order Traversal__, __Post-order Traversal__
 
    Easy to implement in recursion. Drawbacks are slow in execution. Fast implementation using stacks and queues in combination with record (hash table) of visited node. 
    
-   In-order Traversal implements using a stack to keep track of an _entire_ sub-tree and backtracking _only when_ no left sub-tree exists on __unvisited__ nodes. After visit of root, track the root of right sub-tree. 
+   1. In-order Traversal implements using a stack to keep track of an _entire_ sub-tree and backtracking _only when_ no left sub-tree exists on __unvisited__ nodes. After visit of root, track the root of right sub-tree. 
 
-   Pre-order Traversal using a stack to keep track of the __root__ of all right subtree along the visits
+   2. Pre-order Traversal using a stack to keep track of the __root__ of all right subtree along the visits
 
 
 ## Heap (Priority queue)
