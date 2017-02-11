@@ -60,7 +60,7 @@ This subsection implements a set of graph-based algorithms. It consists of three
 
     4. Delete all edges that connect points within a common group. 
 
-    5. Repeat step i) until there are only two groups. Then return all edges that connects two groups. 
+    5. Repeat step i) until there are only two groups. Then return all edges that connect two groups. 
 
   
       `../../bin/graph_algo/test_mincut "../../data/kargerMinCut.txt" 23 0`
