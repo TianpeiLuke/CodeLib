@@ -6,7 +6,7 @@ There are two main data strcutures in searching:
 
 ## Binary Search Tree (BST)
 
-A __binary search tree (BST)__ contains a struct `BST_Node`, each tree node contains a `key` and two children. The basic rule for BST is that the keys for _all left sub-tree are less than the root_, and _the keys for all right sub-tree are greater than the root_. 
+A __binary search tree (BST)__ contains a struct `BST_Node`, each tree node contains a `key` and two `children`. The basic rule for BST is that the keys for _all left sub-tree are less than the root_, and _the keys for all right sub-tree are greater than the root_. 
 
 1. __Pre-order Traversal__, __In-order Traversal__, __Post-order Traversal__
 
@@ -14,9 +14,19 @@ A __binary search tree (BST)__ contains a struct `BST_Node`, each tree node cont
    
    1. _In-order Traversal_ implements using a stack to keep track of an __entire__ _left sub-tree_ and backtracking _only when_ no left sub-tree exists on __unvisited__ nodes. After visit of root, track the root of right sub-tree. 
 
+       In-order traverse ouput the strict linear ordering of keys due to the defintion of BST. ([left sub-tree < root < right sub-tree])
+
    2. _Pre-order Traversal_ uses a stack to keep track of the __root__ of all _right subtree_ __along successive visits__ of the _left subtree_. Backtracking _only when_ the left sub-tree is _empty_.  
 
    3. _Post-order Traversal_ uses a stack to keep track of __both__ _left sub-tree_ and _right sub-tree_ at first. Backtracking only when __both__ left sub-tree and right sub-tree are _empty_ or __visited__.  
+
+
+2. __Backtracking__
+
+Implemented with a stack of node path and a hash table of visited nodes. Backtracking implements a DFS-style traverse across the entire space. 
+
+3. __
+
 
 ## Heap (Priority queue)
 
