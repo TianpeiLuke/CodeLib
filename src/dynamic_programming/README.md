@@ -14,11 +14,16 @@ This subsection includes several hard problems that have fast implementation bas
 
     The _dependency_ of subproblems to master problem can be describled as __trees__. Note that due to repeating structure, many intermediate subproblems are exactly the same. 
 
+  3. __Reconstructing of optimal solution via memoization__ 
+
     The __efficiency__ of dynamic programming lies in its __bookkeeping property__, i.e. it __store the state of previous solved subproblems__. Then when the same problem occur again, it does not need to solve it again. 
 
+    Also, the optimal solution of each subproblem can be __reconstructed__ from a small amount of previous states (e.g. optimal solution of previous subproblems). 
 
 
-    1. Different from __divide-and-conquer__: _divide-and-conquer_ __partition__ the state space into __non-overlapping region__. But dynamic programming _cover_ the state space with __overlapping region__
+
+    1. Different from __divide-and-conquer__: _divide-and-conquer_ __partition__ the state space into __non-overlapping region__. But dynamic programming _cover_ the state space with __overlapping region__. Although both can be solved recursively, divide-and-conquer algorithm solves new subproblem at each branch, while the dynamic programming do not solve "unseen new" problems.
+
 
     2. Different from __greedy algorithms__: the optimal solution of _greedy algorithm_ _only_ depends on _current_ information available. the optimal solution of dynamic programming depends on the __entire trajectory of optimal solutions__ in past history. 
 
