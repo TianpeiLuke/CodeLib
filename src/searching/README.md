@@ -25,7 +25,7 @@ A __binary search tree (BST)__ contains a struct `BST_Node`, each tree node cont
 
 2. __Backtracking__
 
-Implemented with a stack of node path and a hash table of visited nodes. Backtracking implements a DFS-style traverse across the entire space. 
+   Implemented with a stack of node path and a hash table of visited nodes. Backtracking implements a DFS-style traverse across the entire space. 
 
 
 ## Heap (Priority queue)
@@ -46,10 +46,10 @@ Find the max/min value takes $O(1)$ time, while `pop` and `push` takes $O(\log(n
 
 2. __Median of Streaming data__
 
-Use a __min-heap__ to maintain all exists keys that __greater than (>)__ current key and a __max-heap__ to maintian all existing keys that __less than (<=)__ current key. Then to as long as two heaps are of the same size, (or __max-heap.size__ < __min-heap.size__ <= __max-heap.size + 1__), the top in __min-heap__ is the median.
+   Use a __min-heap__ to maintain all exists keys that __greater than (>)__ current key and a __max-heap__ to maintian all existing keys that __less than (<=)__ current key. Then to as long as two heaps are of the same size, (or __max-heap.size__ < __min-heap.size__ <= __max-heap.size + 1__), the top in __min-heap__ is the median.
 
-Note that if the size of two heaps are not balanced, pop the top elements in one heap and push into the other heap. 
+   Note that if the size of two heaps are not balanced, pop the top elements in one heap and push into the other heap. 
 
-In total, takes $O(n\log(n))$ times with $O(n)$ space. 
+   In total, takes $O(n\log(n))$ times with $O(n)$ space. 
 
 
