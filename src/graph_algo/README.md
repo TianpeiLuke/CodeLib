@@ -53,8 +53,13 @@ This subsection implements a set of graph-based algorithms. It consists of three
    Here `numIsLands.cpp` uses disjoint-set forests structure. Takes O(n log(n)) time complexity.
 
 
-   4. __Dijkstra's Algorithm in Single-Source-Shortest-Path__ for nonnegative weighted directed graph
+   4. __Dijkstra's Algorithm__ in __single-source-shortest-path__ for nonnegative weighted directed graph
 
       Implementation using a min-heap maintaining `<node, key>` pair with key = Dijkstra's greedy score. Updating for each edges that passing from visited nodes to unvisited nodes. Very Fast implementation O(|E| + |V| log(|V|)) compared with a naive implementation which requires O(|V|^2)
 
        `../../bin/test_dijkstra "../../data/dijkstraData.txt"`
+
+
+   5. __Kruskal's algorithm__ in __minimal-spanning-tree__ 
+
+      Implementation using __disjoint-set data structure__.  
