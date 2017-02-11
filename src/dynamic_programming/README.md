@@ -12,6 +12,11 @@ This subsection includes several hard problems that have fast implementation bas
 
     The successive subproblems share resources (e.g. sharing of hidden states, the optimal value of previous subproblem, or intermedia solution of previous problem)
 
+    The _dependency_ of subproblems to master problem can be describled as __trees__. Note that due to repeating structure, many intermediate subproblems are exactly the same. 
+
+    The __efficiency__ of dynamic programming lies in its __bookkeeping property__, i.e. it __store the state of previous solved subproblems__. Then when the same problem occur again, it does not need to solve it again. 
+
+
 
     1. Different from __divide-and-conquer__: _divide-and-conquer_ __partition__ the state space into __non-overlapping region__. But dynamic programming _cover_ the state space with __overlapping region__
 
