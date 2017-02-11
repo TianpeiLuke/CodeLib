@@ -44,6 +44,8 @@ This subsection implements a set of graph-based algorithms. It consists of three
 
     2. `Union`: join two subsets into one. eps. merge the representative of two groups by making one representative be the _root_ of the other.
  
+    Here `numIsLands.cpp` uses union-find data structure.
+
 
    4. __Dijkstra's Algorithm in Single-Source-Shortest-Path__ for nonnegative weighted directed graph
 
