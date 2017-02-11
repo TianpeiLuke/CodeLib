@@ -51,6 +51,16 @@ void dfs_first_SCC(const unordered_map<int, vector<int>> adjList, int root, unor
 void dfs_second_SCC(const unordered_map<int, vector<int>> adjList, const int root, unordered_map<int, bool>&visited, vector<pair<int, int>>&SCC, unordered_map<int, int>& leader, bool verbose);
 
 
+// connected components in undirected graph
+void CC_init(const unordered_map<int, vector<int>> adjList, unordered_map<int,int>& CC);
+
+void CC_BFS(const unordered_map<int, vector<int>> adjList, unordered_map<int, bool> visited, unordered_map<int, int>& CC, vector<pair<int, int>>& CC_groups);
+
+void CC_unionFind(const unordered_map<int, vector<int>> adjList, unordered_map<int, bool> visited, unordered_map<int, int>& CC, vector<pair<int, int>>& CC_groups );
+
+void bfs_CC(const unordered_map<int, vector<int>> adjList, int root, unordered_map<int, bool>& visited,  unordered_map<int, int>& CC);
+
+
 // dijkstra's algorithm
 void dijkstra(const unordered_map<int, vector<int>> adjList, const unordered_map<int, vector<int>> weights, unordered_map<int, bool>& visited,  int source, unordered_map<int, int>& min_path);
 
