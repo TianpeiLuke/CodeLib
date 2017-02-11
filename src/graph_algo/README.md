@@ -18,27 +18,7 @@ This subsection implements a set of graph-based algorithms. It consists of three
     The topological ordering of graph nodes requires all parents occurs before their children. Basic ordering on a graph. For undirected graph, can be implemented using BFS. For __directed graph__, __only DFS__ can be used 
 
 ## Graph Topology Algorithms
-   1. __Strong Connected Components (directed graph)__ and __Connected Components (undirected graph)__ 
-
-      Using __Kosaraju__'s two-pass DFS implementation for __SCC__. 
-      
-    1. The first DFS pass over the __reverse graph__ to compute a `finishing time` which provides an node ordering (i.e.an  _decreasing ordering_ of _visit_ by DFS). 
-
-    2. The second DFS pass over the __original graph__ and choose _root_ according to the __decreasing ordering__ of `finishing time` of nodes. Each _complete DFS_ pass over one single strong connected components.
-
-     `../../bin/graph_algo/test_scc "../../data/SCC.txt 0"`
-
-
-      Using BFS for __CC__. Also use __union-find__ data structure to find CC.
-
-   2. __Min Cut (undirected graph)__
-
-      Using Karger's randomized algorithm and node group-merging   
-  
-      `../../bin/graph_algo/test_mincut "../../data/kargerMinCut.txt" 23 0`
-
-
-   3. __Union Find__
+   1. __Union Find__
    
      A __disjoint-set data structure__, or __union-find data strcuture__ is a data structure that keeps track of a set of elements partitioned into a number of disjoint (non-overlapping) subsets. It supports two basic operations
 
@@ -53,6 +33,39 @@ This subsection implements a set of graph-based algorithms. It consists of three
    Note Disjoint-set data structure does __not__ allow __deletion__ of nodes.
 
    Here `numIsLands.cpp` uses disjoint-set forests structure. Takes O(n log(n)) time complexity.
+   
+
+   2. __Strong Connected Components (directed graph)__ and __Connected Components (undirected graph)__ 
+
+      Using __Kosaraju__'s two-pass DFS implementation for __SCC__. 
+      
+    1. The first DFS pass over the __reverse graph__ to compute a `finishing time` which provides an node ordering (i.e.an  _decreasing ordering_ of _visit_ by DFS). 
+
+    2. The second DFS pass over the __original graph__ and choose _root_ according to the __decreasing ordering__ of `finishing time` of nodes. Each _complete DFS_ pass over one single strong connected components.
+
+     `../../bin/graph_algo/test_scc "../../data/SCC.txt 0"`
+
+
+      Using BFS for __CC__. Also use __union-find__ data structure to find CC.
+
+   3. __Min Cut (undirected graph)__
+
+      Using Karger's randomized algorithm. 
+
+    1. For all existing edges, pick up one `(u,v)` at random. By construction, they are from different clusters (groups). 
+
+    2. Use disjoint-set data structure, find the group for each end point `u` and `v`
+
+    3. Take union of two groups.
+
+    4. Delete all edges that connect points within a common group. 
+
+    5. Repeat step i)
+
+  
+      `../../bin/graph_algo/test_mincut "../../data/kargerMinCut.txt" 23 0`
+
+
 
 
    4. __Dijkstra's Algorithm__ in __single-source-shortest-path__ for nonnegative weighted directed graph
