@@ -37,7 +37,19 @@ The __heap property__: if $A$ is a _parent_ node $B$, then the _key_ of node $A$
 The children of index `i` is `2i+1` and `2i+2`. The parent of index `i` is `
 \lfloor{\frac{i-1}{2}\rfloor}`
 
+Find the max/min value takes $O(1)$ time, while `pop` and `push` takes $O(\log(n))$ time. `make_heap(n)` takes $O(n\log(n))$ time. 
+
+1. __Heap Sort__
+
+   A heap sort takes $O(n\log(n))$. It is a version of __comparison-based sorting__. 
 
 
+2. __Median of Streaming data__
+
+Use a __min-heap__ to maintain all exists keys that __greater than (>)__ current key and a __max-heap__ to maintian all existing keys that __less than (<=)__ current key. Then to as long as two heaps are of the same size, (or __max-heap.size__ < __min-heap.size__ <= __max-heap.size + 1__), the top in __min-heap__ is the median.
+
+Note that if the size of two heaps are not balanced, pop the top elements in one heap and push into the other heap. 
+
+In total, takes $O(n\log(n))$ times with $O(n)$ space. 
 
 
