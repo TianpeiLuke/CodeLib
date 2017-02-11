@@ -14,8 +14,9 @@ A __binary search tree (BST)__ contains a struct `BST_Node`, each tree node cont
    
    1. _In-order Traversal_ implements using a stack to keep track of an _entire_ sub-tree and backtracking _only when_ no left sub-tree exists on __unvisited__ nodes. After visit of root, track the root of right sub-tree. 
 
-   2. _Pre-order Traversal_ using a stack to keep track of the __root__ of all right subtree along the visits of the left subtree. Backtracking _only when_ the left sub-tree is _empty_.  
+   2. _Pre-order Traversal_ using a stack to keep track of the __root__ of all _right subtree_ __along successive visits__ of the _left subtree_. Backtracking _only when_ the left sub-tree is _empty_.  
 
+   3. _Post-order Traversal_ using a stack to keep track of __both__ _left sub-tree_ and _right sub-tree_. 
 
 ## Heap (Priority queue)
 
