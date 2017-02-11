@@ -29,6 +29,6 @@ This subsection implements a set of graph-based algorithms. It consists of three
    
       Using in find set union. Using additional one bit to construct a merge-tree and keep track of a common root within all nodes in one group. 
 
-   4. __Dijkstra's Algorithm in Single-Source-Minimal-Path__
+   4. __Dijkstra's Algorithm in Single-Source-Shortest-Path for nonnegative weighted directed graph__
 
       Implementation using a min-heap maintaining `<node, key>` pair with key = Dijkstra's greedy score. Updating for each edges that passing from visited nodes to unvisited nodes. Very Fast implementation $O(m\log(n))$
