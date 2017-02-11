@@ -27,4 +27,25 @@ This subsection includes several hard problems that have fast implementation bas
 
     2. Different from __greedy algorithms__: the optimal solution of _greedy algorithm_ _only_ depends on _current_ information available. the optimal solution of dynamic programming depends on the __entire trajectory of optimal solutions__ in past history. 
 
-    3. Benefits over the __recursion__: __avoid repeating__ solving previous solved problems by __bookkeeping__ or tabluar storage. Require __additional spaces__. 
+    3. Benefits over the __recursion__: __avoid repeating__ solving previous solved problems by __bookkeeping__ or tabluar storage. Require __additional spaces__.
+
+
+
+## Examples 
+
+  1. Finding the maximum sum of subarray 
+  
+   From an array of numbers, find a contiguous subarray with maximum sum. This problem can be solved in divide-and-conquer with O(n\log(n)) time complexity, but using dynamic programming, we can solve it in O(n) time complexity with an additional O(n) space complexity. 
+
+
+  2. Edit distance 
+ 
+   Finding how many operations (insertion, deletion, substitution) needed to tranform one string to another string. Naive implementation with O(2^n) time complexity with recursion. The dynamic programming reduce it to O(mn) time complexity and O(mn) space complexity (can be O(min(m,n))), with m,n are size of two strings, respectively. 
+
+
+  3. Finding the longest common subsquences
+
+   Want to find the maximum length of common subsequence in both strings. Naive implementation requires O(2^(m+n)) time complexity. The dynamic programming requires O(m+n) time complexity with O(mn) space complexity.
+
+
+    
