@@ -18,7 +18,7 @@ This subsection implements a set of graph-based algorithms. It consists of three
 ## Graph Topology Algorithms
    1. __Strong Connected Components (directed graph)__ and __Connected Components (undirected graph)__ 
 
-      Using Kosaraju's two-pass DFS implementation for __SCC__. Using BFS for __CC__
+      Using __Kosaraju__'s two-pass DFS implementation for __SCC__. Using BFS for __CC__
 
      `../../bin/graph_algo/test_scc "../../data/SCC.txt 0"`
 
@@ -35,6 +35,6 @@ This subsection implements a set of graph-based algorithms. It consists of three
 
    4. __Dijkstra's Algorithm in Single-Source-Shortest-Path for nonnegative weighted directed graph__
 
-      Implementation using a min-heap maintaining `<node, key>` pair with key = Dijkstra's greedy score. Updating for each edges that passing from visited nodes to unvisited nodes. Very Fast implementation $O(m\log(n))$
+      Implementation using a min-heap maintaining `<node, key>` pair with key = Dijkstra's greedy score. Updating for each edges that passing from visited nodes to unvisited nodes. Very Fast implementation $O(|E| + |V| log(|V|))$ compared with a naive implementation which requires O(|V|^2)
 
        `../../bin/test_dijkstra "../../data/dijkstraData.txt"`
