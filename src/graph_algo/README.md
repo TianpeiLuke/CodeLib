@@ -27,7 +27,7 @@ This subsection implements a set of graph-based algorithms. It consists of three
      `../../bin/graph_algo/test_scc "../../data/SCC.txt 0"`
 
 
-      Using BFS for __CC__
+      Using BFS for __CC__. Also use __union-find__ data structure to find CC.
 
    2. __Min Cut (undirected graph)__
 
@@ -44,7 +44,13 @@ This subsection implements a set of graph-based algorithms. It consists of three
 
     2. `Union`: join two subsets into one. eps. merge the representative of two groups by making one representative be the _root_ of the other.
  
-    Here `numIsLands.cpp` uses union-find data structure.
+    In implementation, there are linked list based or __disjoint-set forests__ methods. In disjoint-set forests implementation, each node holds a __reference to its parent node__. 
+
+   Disjoint-set data strcuture can be used to keep track of _connected components_ in an _undirected graph_. Also useful in __Kruskal's algorithm__ in __minimal-spanning tree__.
+
+   Note Disjoint-set data structure does __not__ allow __deletion__ of nodes.
+
+   Here `numIsLands.cpp` uses disjoint-set forests structure. Takes O(n log(n)) time complexity.
 
 
    4. __Dijkstra's Algorithm in Single-Source-Shortest-Path__ for nonnegative weighted directed graph
