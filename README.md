@@ -2,7 +2,7 @@
    
    created by Tianpei Xie, Jan 18, 2017 
 
-   For algorithm leanring, includes implementations in C++
+   For algorithm learning, includes implementations in C++
 
 ## List of algorithms
  1. [Divide and Conquer](https://github.com/TianpeiLuke/CodeLib/tree/master/src/divide_conquer)
