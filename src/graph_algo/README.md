@@ -50,7 +50,7 @@ This subsection implements a set of graph-based algorithms. It consists of three
 
    3. __Min Cut (undirected graph)__
 
-      Using Karger's randomized algorithm. 
+      Using __Karger__'s randomized algorithm. 
 
     1. For all existing edges, pick up one `(u,v)` at random. By construction, they are from different clusters (groups). 
 
@@ -60,7 +60,7 @@ This subsection implements a set of graph-based algorithms. It consists of three
 
     4. Delete all edges that connect points within a common group. 
 
-    5. Repeat step i)
+    5. Repeat step i) until there are only two groups. Then return all edges that connects two groups. 
 
   
       `../../bin/graph_algo/test_mincut "../../data/kargerMinCut.txt" 23 0`
