@@ -3,9 +3,9 @@ This subsection includes several hard problems that have fast implementation bas
 
 ## Charateristics of dynamic programming
 
-  1. __Repeated structures__
+  1. __Optimal substructures__
   
-    The original problem can be solved by solving a sequence of subproblems. Each subproblem has exactly the same structure but with smaller size of state space(e.g. the dimension of state space, size of data involved etc.)
+    The __optimal solution__ of the original problem __contains within__ __optimal solutions__ of a sequence of _subproblems_. Each subproblem has exactly the same structure but with smaller size of state space (e.g. the dimension of state space, size of data involved etc.)
 
 
   2. __Sharing of resources (non-independent)__
