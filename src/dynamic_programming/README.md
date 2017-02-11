@@ -12,7 +12,7 @@ This subsection includes several hard problems that have fast implementation bas
 
     The successive subproblems share resources (e.g. sharing of hidden states, the optimal value of previous subproblem, or intermedia solution of previous problem). The subproblems should have smaller state space, and can be solved using recursion over and over again __without generating new problem__. 
 
-    The _dependency_ of subproblems to master problem can be describled as __trees__. Note that due to repeating structure, many intermediate subproblems are exactly the same. 
+    The _dependency_ of subproblems to master problem can be describled as __trees__. Note that due to repeating structure, many intermediate subproblems are exactly the same. The total number of __distinct subproblems__ is much smaller than the total number of intermedia nodes in the tree.  
 
   3. __Reconstructing of optimal solution via memoization__ 
 
