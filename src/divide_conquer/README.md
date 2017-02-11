@@ -9,7 +9,7 @@ This subsection implements various of divide and conquer algorithms.
 
   2. __Non-sharing resources (independent)__
 
-  Each of the subproblem does __not share resources__ (i.e. input, intermedia results etc.). 
+  Each of the subproblem does __not share resources__ (i.e. states for each subproblem such as the input, intermedia results etc.). 
 
 
 
