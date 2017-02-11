@@ -8,7 +8,7 @@ This subsection includes several hard problems that have fast implementation bas
     The __optimal solution__ of the original problem __contains within__ __optimal solutions__ of a sequence of _subproblems_. Each subproblem has exactly the same structure but with smaller size of state space (e.g. the dimension of state space, size of data involved etc.)
 
 
-  2. __Sharing of resources (non-independent)__
+  2. __Sharing of resources (overlapping subproblems)__
 
     The successive subproblems share resources (e.g. sharing of hidden states, the optimal value of previous subproblem, or intermedia solution of previous problem)
 
