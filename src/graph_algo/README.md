@@ -18,7 +18,13 @@ This subsection implements a set of graph-based algorithms. It consists of three
 ## Graph Topology Algorithms
    1. __Strong Connected Components (directed graph)__ and __Connected Components (undirected graph)__ 
 
-      Using __Kosaraju__'s two-pass DFS implementation for __SCC__. Using BFS for __CC__
+      Using __Kosaraju__'s two-pass DFS implementation for __SCC__. 
+      
+    1. The first DFS pass over the __reverse graph__ to compute a `finishing time` which provides an node ordering (_increasing ordering_ of __backtracking__ visit by DFS). 
+
+    2. The second DFS pass over the __original graph__ and choose _root_ according to the __decreasing ordering__ of `finishing time` of nodes. Each _complete DFS_ pass over one single strong connected components.
+
+      Using BFS for __CC__
 
      `../../bin/graph_algo/test_scc "../../data/SCC.txt 0"`
 
