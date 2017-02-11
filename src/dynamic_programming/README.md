@@ -35,7 +35,7 @@ This subsection includes several hard problems that have fast implementation bas
 
   1. Finding the __maximum sum of subarray__ 
   
-   From an array of numbers, find a __contiguous subarray with maximum sum__. This problem can be solved in divide-and-conquer with O(n\log(n)) time complexity, but using dynamic programming, we can solve it in O(n) time complexity with an additional O(n) space complexity. 
+   From an array of numbers, find a __contiguous subarray with maximum sum__. This problem can be solved in divide-and-conquer with O(n log(n)) time complexity, but using dynamic programming, we can solve it in O(n) time complexity with an additional O(n) space complexity. 
 
 
   2. __Edit distance__
