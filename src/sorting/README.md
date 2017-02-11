@@ -45,7 +45,7 @@ The __comparison-based sorting__ algorithms do __not have direct access to the v
 
     3. Retrieve the ordered array by iteratively `pop` out the top root elements (i.e. the maximum/minimum depending on the min-heap or max-heap)
 
-    Need O(n\log(n)) to make heap for existing array. time complexity O(n\log(n)) and it is a __const__ upper bound. __Unstable sorting__.
+    Need O(n\log(n)) to make heap for existing array. time complexity O(n\log(n)) and it is a __const__ upper bound.__in-place sorting__ but  __Unstable sorting__.
 
 
 
