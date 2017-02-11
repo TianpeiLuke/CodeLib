@@ -1,7 +1,7 @@
 # Greedy Algorithm
 This section involves implementation of several greedy algorithms.
 
-## Characteristics of greedy algorithm
+## Characteristics of greedy algorithms
 
   1. Optimal substructure
 
@@ -21,7 +21,10 @@ This section involves implementation of several greedy algorithms.
   2. __Dijkstra's single-source-shortest-path algorithm__
 
 
-  3. __hiriearchical clustering, Huffman's coding__
+  3. __Minimal-spanning-tree algorithm__
+
+
+  4. __hiriearchical clustering, Huffman's coding__
 
 
   
