@@ -46,3 +46,21 @@ The __comparison-based sorting__ algorithms do __not have direct access to the v
     3. Retrieve the ordered array by iteratively `pop` out the top root elements (i.e. the maximum/minimum depending on the min-heap or max-heap)
 
     Need O(n\log(n)) to make heap for existing array. time complexity O(n\log(n)) and it is a __const__ upper bound. __Unstable sorting__.
+
+
+
+## Non-comparsion sorting
+  
+   When additional assumptions are made on the __values__ of the elements in unsorted array, the sorting algorithm is __non-comparison based__.
+
+
+  1. __bucketSort__
+
+   A __distribution sort__. Requires data values are __bounded__.  In essence, construct a __histogram__ of data values. 
+
+
+  2. __radixSort__
+
+   A _non-comparative_ __integer__ sorting algorithm. Sort data with __integer keys__ by __grouping keys__ by individual digits which __share the same significant position and value__. 
+
+   
