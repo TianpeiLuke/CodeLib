@@ -14,9 +14,10 @@ A __binary search tree (BST)__ contains a struct `BST_Node`, each tree node cont
 
 A __Heap__ is conceptually a complete BST that every node either has two childrenor has no children. In implementation, it usually use an array since it do not need additional bits to store the pointers of the children  
 
-The __heap property__: if $A$ is a parent node $B$, then the _key_ of node $A$ is ordered with respect to the key of $B$ with the _same_ ordering apping to the heap. For instance, the __min heap__ has root as the minimal of the list and int each subtree, the key of root is smaller than all of its descendants.  
+The __heap property__: if $A$ is a _parent_ node $B$, then the _key_ of node $A$ is ordered with respect to the key of $B$ with the _same_ ordering apping to the heap. For instance, the __min heap__ has root as the minimal of the list and int each subtree, the key of root is smaller than all of its descendants.  
 
-The children of index `i` is `2i+1` and `2i+2`. The 
+The children of index `i` is `2i+1` and `2i+2`. The parent of index `i` is `
+\lfloor{\frac{i-1}{2}\rfloor}`
 
 
 
