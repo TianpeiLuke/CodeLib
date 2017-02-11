@@ -55,7 +55,7 @@ The __comparison-based sorting__ algorithms do __not have direct access to the v
 
   1. __countingSort__
 
-   An __integer__ sorting algorithm. an non-comparative sorting. Count a __histogram__ that record the __number of occurance for each integers__ in the unsorted array.
+   An __integer__ sorting algorithm. an non-comparative sorting. Count a __histogram__ that record the __number of occurances for each integers__ in the unsorted array.
 
      
 
