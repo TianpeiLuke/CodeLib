@@ -12,7 +12,7 @@ A __binary search tree (BST)__ contains a struct `BST_Node`, each tree node cont
 
    Easy to implement in recursion. Drawbacks are slow in execution. Fast implementation using stack as tracker and backtracking in combination with record (hash table) of visited node. 
    
-   1. _In-order Traversal_ implements using a stack to keep track of an _entire_ sub-tree and backtracking _only when_ no left sub-tree exists on __unvisited__ nodes. After visit of root, track the root of right sub-tree. 
+   1. _In-order Traversal_ implements using a stack to keep track of an __entire__ left sub-tree and backtracking _only when_ no left sub-tree exists on __unvisited__ nodes. After visit of root, track the root of right sub-tree. 
 
    2. _Pre-order Traversal_ uses a stack to keep track of the __root__ of all _right subtree_ __along successive visits__ of the _left subtree_. Backtracking _only when_ the left sub-tree is _empty_.  
 
