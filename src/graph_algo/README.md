@@ -31,4 +31,4 @@ This subsection implements a set of graph-based algorithms. It consists of three
 
    4. __Dijkstra's Algorithm in Single-Source-Minimal-Path__
 
-      Implementation using a min-heap maintaining `<node, key>` pair with key = Dijkstra's greedy score. Very Fast implementation $O(m\log(n))$
+      Implementation using a min-heap maintaining `<node, key>` pair with key = Dijkstra's greedy score. Updating for each edges that passing from visited nodes to unvisited nodes. Very Fast implementation $O(m\log(n))$
