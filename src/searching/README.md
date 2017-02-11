@@ -31,7 +31,7 @@ A __binary search tree (BST)__ contains a struct `BST_Node`, each tree node cont
 
    For each node, adding additional bits to record the __size of the sub-tree rooted at given node__. Note that the __insertion__ of each node means that the size of _all nodes along path from the given node (leaf) to the root_ will increase by one. 
 
-   Finding the k-th order statistics reduces to finding __size of left-children as $`k-1`$__.
+   Finding the k-th order statistics reduces to finding __size of left-children as `k-1`__.
 
 ## Heap (Priority queue)
 
