@@ -14,5 +14,5 @@ This subsection involves problems that can be implemented efficiently using addi
 
  3. __Implementation of Graph adjacency list representation__
 
-    Since the most commonly used operation in adjacency list representation is searching, it make sense to reduce to (accessing, insertion, deletion) time complexity as $O(1)$.
+    Since the most commonly used operation in adjacency list representation is searching (i.e. access, insertion, deletion),  it make sense to reduce to time complexity as $O(1)$.
 
