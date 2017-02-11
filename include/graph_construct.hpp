@@ -53,6 +53,8 @@ void show_edgeList(const vector<pair<int, int>> edgeList);
 //======================================================================
 // define the  disjoint-set data structure
 
+void init_unionFind(const unordered_map<int, vector<int>> adjList, unordered_map<int,int>& parent);
+
 int find(unordered_map<int,int>& parent, int node);
 
 

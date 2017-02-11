@@ -1,85 +1,5 @@
 #include "../../include/graph_construct.hpp"
 
-
-bool Graph_load_edges(string filename, unordered_map<int, vector<int>>& adjList, unordered_map<int, bool>& visited){
-/*
-    Load edgeList from txt file
-    each row is a directed edge [source target] or [tail head]
-    
-*/
-    ifstream infile(filename);
-    if(!adjList.empty()) adjList.clear();
-    // vector<int> nodeloc;
-    visited.clear();
-    cout<<"Load edge list from "<<filename<<endl;
-    int total_source_size = 0; 
-    while(infile){
-        string line;
-        if(!getline(infile, line)) break;
-
-        istringstream ss(line);
-        vector<int> record;
-        int vertexIdx = -1;
-        int vertexLoc = -1;
-        int temp;
-        while(ss >> temp){
-           //cout<<temp<<" ";
-           record.push_back(temp);
-        }//cout<<endl;
-        // store the source node
-        try{
-           //bool visit = visited.at(record[0]);
-           // add the target node
-           adjList.at(record[0]).push_back(record[1]);
-        }catch(const std::out_of_range& oor){
-           visited[record[0]] = false;
-           vector<int> new_row; // a new row
-           new_row.push_back(record[1]);
-           adjList[record[0]] = new_row;
-        }
-
-        try{
-           bool trial = visited.at(record[1]);
-           // add the target node
-           // adjList[vertexLoc].push_back(record[1]);
-        }catch(const std::out_of_range& oor){
-           visited[record[1]] = false;
-           vector<int> new_row2; // a new row
-           //new_row.push_back(record[1]);
-           adjList[record[1]] = new_row2;
-        }
-    }
-    if(!infile.eof()){
-       cerr<<"Corrupted file!"<<endl;
-       return false;
-    }
-    cout<<"Total number of rows in adjList: "<<adjList.size()<<endl;
-    return true;
-}
-
-
-//void Graph_reverse(const vector<vector<int>> adjList, const unordered_map<int, int> nodeloc,  vector<vector<int>>& adjList_reverse){
-//
-//    // reverse the edge direction of the graph
-//    int n = adjList.size();
-//    if(!adjList_reverse.empty()) adjList_reverse.clear();
-//    //
-//    cout<<"Graph initialization ..."<<endl;
-//    for(int i=0; i<n; i++){
-//       vector<int> row;
-//       row.push_back(adjList[i][0]);  //store the same set of nodes
-//       adjList_reverse.push_back(row);
-//    }
-//    int nodeIdx = -1;
-//    cout<<"Edge reverse"<<endl;
-//    for(int i=0; i<n; i++){
-//        for(int j=1; j<adjList[i].size(); j++){
-//            nodeIdx = nodeloc.at(adjList[i][j]);      //find the row of target node
-//            adjList_reverse[nodeIdx].push_back(adjList[i][0]); //the index of source node
-//        }
-//    }
-//}
-
 //===========================================================================
 bool Graph_load(string filename, unordered_map<int, vector<int>>& adjList, unordered_map<int, bool>& node_visit ){
 /*
@@ -144,6 +64,64 @@ bool Graph_load(string filename, unordered_map<int, vector<int>>& adjList, unord
     
     return true;
 }
+
+
+bool Graph_load_edges(string filename, unordered_map<int, vector<int>>& adjList, unordered_map<int, bool>& visited){
+/*
+    Load edgeList from txt file
+    each row is a directed edge [source target] or [tail head]
+    
+*/
+    ifstream infile(filename);
+    if(!adjList.empty()) adjList.clear();
+    // vector<int> nodeloc;
+    visited.clear();
+    cout<<"Load edge list from "<<filename<<endl;
+    int total_source_size = 0; 
+    while(infile){
+        string line;
+        if(!getline(infile, line)) break;
+
+        istringstream ss(line);
+        vector<int> record;
+        int vertexIdx = -1;
+        int vertexLoc = -1;
+        int temp;
+        while(ss >> temp){
+           //cout<<temp<<" ";
+           record.push_back(temp);
+        }//cout<<endl;
+        // store the source node
+        try{
+           //bool visit = visited.at(record[0]);
+           // add the target node
+           adjList.at(record[0]).push_back(record[1]);
+        }catch(const std::out_of_range& oor){
+           visited[record[0]] = false;
+           vector<int> new_row; // a new row
+           new_row.push_back(record[1]);
+           adjList[record[0]] = new_row;
+        }
+
+        try{
+           bool trial = visited.at(record[1]);
+           // add the target node
+           // adjList[vertexLoc].push_back(record[1]);
+        }catch(const std::out_of_range& oor){
+           visited[record[1]] = false;
+           vector<int> new_row2; // a new row
+           //new_row.push_back(record[1]);
+           adjList[record[1]] = new_row2;
+        }
+    }
+    if(!infile.eof()){
+       cerr<<"Corrupted file!"<<endl;
+       return false;
+    }
+    cout<<"Total number of rows in adjList: "<<adjList.size()<<endl;
+    return true;
+}
+
 
 
 bool Graph_load_weights(string filename, unordered_map<int, vector<int>>& adjList, unordered_map<int, vector<int>>& weights, unordered_map<int, bool>& node_visit){
@@ -357,72 +335,123 @@ void show_edgeList(const vector<pair<int,int>> edgeList){
     }
 }
 //==========================================================================
-
-void copy_AdjList(const vector<vector<int>*> AdjList, const vector<int> NodeList, vector<vector<int>*>& Copy_AdjList, vector<int>& Copy_NodeList){
-    if(!Copy_AdjList.empty()) Copy_AdjList.clear();
-    if(!Copy_NodeList.empty()) Copy_NodeList.clear();
-    for(int i=0; i<AdjList.size(); i++){
-        int size_row = AdjList[i]->size();
-        vector<int> * temp = new vector<int> ();
-        
-        for(auto j=AdjList[i]->begin(); j<AdjList[i]->end(); j++){
-           temp->push_back(*j);
-        }
-        Copy_AdjList.push_back(temp);
+//   Disjoint-set data strcture
+void init_unionFind(const unordered_map<int, vector<int>> adjList, unordered_map<int, int>& parent){
+    parent.clear();
+    for(auto it=adjList.begin(); it!=adjList.end(); it++){
+         int node = it->first;
+         parent[node] = node;
     }
-    for(int i=0; i<NodeList.size(); i++)
-        Copy_NodeList.push_back(NodeList[i]);
+}
+
+
+
+int find(unordered_map<int, int>& parent, int node){
+    // find the root representative of the group
+    int root = node;
+    while(parent[root] != root){
+         root = parent[root];
+    }
+    return root;
+}
+
+
+void unionNode(unordered_map<int, int>& parent, int p, int q){
+   /* 
+       find the root representative of group for each of the elem
+         then merge two groups by reassigning one root point to the other
+   */
+   int root_p = find(parent, p);
+   int root_q = find(parent, q);
+
+   if(root_p != root_q){
+       if(root_p < root_q)
+          parent[root_q] = root_p;
+       else
+          parent[root_p] = root_q; 
+   }
 }
 
 
 
 
-void show_AdjList(vector< vector<int>* >& AdjList, int & n){
-    if(n==0) return;
-    for(int i=0; i<n; i++){
-        for(auto row=AdjList[i]->begin(); row<AdjList[i]->end(); row++){
-           cout<<*row<<" ";
-        }
-        cout<<endl;
-    }
-}
 
 
-void read_AdjList(string filename, vector< vector<int>* >& AdjList, vector<int>& NodeList, int & n){
-    int ini_n = AdjList.size();
-    if(ini_n >0) AdjList.clear();
-    if(!NodeList.empty()) NodeList.clear();
-    n = 0;
-    ifstream in_stream;
-    string line;
-    in_stream.open(filename);
-
-    while(getline(in_stream, line)){
-        istringstream linestream(line);
-        vector<int> *temp = new vector<int>();
-        while(!linestream.eof()){
-            int temp_data;
-            linestream>>temp_data;
-            temp->push_back(temp_data);
-        }
-        AdjList.push_back(temp);
-        NodeList.push_back(temp->at(0));
-        n ++;
-    }
-    in_stream.close();
-}
 
 
-void clean_AdjList(vector< vector<int>* >& AdjList, int& n){
-    for(int i=AdjList.size()-1; i>=0; i--){
-        vector<int> * temp;
-        temp = AdjList.back();
-        delete temp;
-        AdjList.pop_back();
-        n--;
-    }
 
-}
+
+
+
+
+
+
+//====================================================================================================
+//void copy_AdjList(const vector<vector<int>*> AdjList, const vector<int> NodeList, vector<vector<int>*>& Copy_AdjList, vector<int>& Copy_NodeList){
+//    if(!Copy_AdjList.empty()) Copy_AdjList.clear();
+//    if(!Copy_NodeList.empty()) Copy_NodeList.clear();
+//    for(int i=0; i<AdjList.size(); i++){
+//        int size_row = AdjList[i]->size();
+//        vector<int> * temp = new vector<int> ();
+//        
+//        for(auto j=AdjList[i]->begin(); j<AdjList[i]->end(); j++){
+//           temp->push_back(*j);
+//        }
+//        Copy_AdjList.push_back(temp);
+//    }
+//    for(int i=0; i<NodeList.size(); i++)
+//        Copy_NodeList.push_back(NodeList[i]);
+//}
+//
+//
+//
+//
+//void show_AdjList(vector< vector<int>* >& AdjList, int & n){
+//    if(n==0) return;
+//    for(int i=0; i<n; i++){
+//        for(auto row=AdjList[i]->begin(); row<AdjList[i]->end(); row++){
+//           cout<<*row<<" ";
+//        }
+//        cout<<endl;
+//    }
+//}
+//
+//
+//void read_AdjList(string filename, vector< vector<int>* >& AdjList, vector<int>& NodeList, int & n){
+//    int ini_n = AdjList.size();
+//    if(ini_n >0) AdjList.clear();
+//    if(!NodeList.empty()) NodeList.clear();
+//    n = 0;
+//    ifstream in_stream;
+//    string line;
+//    in_stream.open(filename);
+//
+//    while(getline(in_stream, line)){
+//        istringstream linestream(line);
+//        vector<int> *temp = new vector<int>();
+//        while(!linestream.eof()){
+//            int temp_data;
+//            linestream>>temp_data;
+//            temp->push_back(temp_data);
+//        }
+//        AdjList.push_back(temp);
+//        NodeList.push_back(temp->at(0));
+//        n ++;
+//    }
+//    in_stream.close();
+//}
+//
+//
+//void clean_AdjList(vector< vector<int>* >& AdjList, int& n){
+//    for(int i=AdjList.size()-1; i>=0; i--){
+//        vector<int> * temp;
+//        temp = AdjList.back();
+//        delete temp;
+//        AdjList.pop_back();
+//        n--;
+//    }
+//
+//}
 
 
 /*

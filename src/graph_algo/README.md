@@ -42,9 +42,9 @@ This subsection implements a set of graph-based algorithms. It consists of three
    
      A __disjoint-set data structure__, or __union-find data strcuture__ is a data structure that keeps track of a set of elements partitioned into a number of disjoint (non-overlapping) subsets. It supports two basic operations
 
-    1. `Find`: determine which subset a particular elem belongs to. Find a _representative (root)_ in the group. 
+    1. `Find`: determine which subset a particular elem belongs to. Find a _representative (root)_ in the group. Take O(log(n)) time. 
 
-    2. `Union`: join two subsets into one. eps. merge the representative of two groups by making one representative be the _root_ of the other.
+    2. `Union`: join two subsets into one. eps. merge the representative of two groups by making one representative be the _root_ of the other. Take O(log(n)) time
  
     In implementation, there are linked list based or __disjoint-set forests__ methods. In disjoint-set forests implementation, each node holds a __reference to its parent node__. 
 
