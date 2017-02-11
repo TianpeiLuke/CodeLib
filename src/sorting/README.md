@@ -3,7 +3,7 @@ This subsection includes implementation of several useful sorting algorithms.
 
 ## Comparison-based sorting
 
-The __comparison-based sorting__ algorithms do __not have direct access to the value__ of elements in an unsorted array but __only__ a method to __compare__ one element with another. The time complexity at least i &omega (n log(n)).
+The __comparison-based sorting__ algorithms do __not have direct access to the value__ of elements in an unsorted array but __only__ a method to __compare__ one element with another. The time complexity at least \Omega(n log(n)).
 
   1. __quickSort__
 
