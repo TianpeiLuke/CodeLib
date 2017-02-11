@@ -4,6 +4,8 @@ This subsection implements a set of graph-based algorithms. It consists of three
 ## Graph Construct
    This includes graph load algorithms and construction of various _graph representations_.The main graph representation uses an __adjacency list__. An __edge list__ representation is also available. Using __hash table__.  
 
+   Also implements __disjoint-set data structure__ with `find` and `unionNode` methods. See descriptions below. 
+
 ## Graph Search Algorithms
    1. __Depth-First-Search (DFS)__ and __Breadth-First-Search (BFS)__
 
