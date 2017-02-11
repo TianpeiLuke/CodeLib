@@ -56,7 +56,7 @@ void show_edgeList(const vector<pair<int, int>> edgeList);
 int find(unordered_map<int,int>& parent, int node);
 
 
-void unionNode(unordered_map<int, int>& parent);
+void unionNode(unordered_map<int, int>& parent, int p, int q);
 
 
 
