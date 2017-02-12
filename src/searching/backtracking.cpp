@@ -39,6 +39,12 @@ vector<string> backtracking_dfs(string input, const unordered_map<char, vector<c
 
     // initialize 
     for(int i=0; i< path_length; i++){
+       try{
+           vector<char> s = LookUpTable.at(input[i]);
+       }catch(const std::out_of_range& oor){
+           results.clear();
+           return results;
+       }  
        ptr_visit[i] = 0;
     }
     int input_ptr = 0; // input_ptr = current of level number
