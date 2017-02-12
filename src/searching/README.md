@@ -33,6 +33,8 @@ A __binary search tree (BST)__ contains a struct `BST_Node`, each tree node cont
   
    1. All paths in a graph 
 
+      Input a sequence of digits as a string, and a LookUp table indicates all possible characters for given digit, print all possible combinations of output strings. 
+
 
    2. All subsets 
   
