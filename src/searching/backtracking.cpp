@@ -27,7 +27,7 @@ vector<string> backtracking_dfs(string input, const unordered_map<char, vector<c
       Whenever a new level is reached, add all possible choice (all the children) into stack 
    */
     vector<string> results;
-    if(input.empty()) return results;
+    if(input.empty() || input=="") return results;
     
     //track the <level_number, path to its parent>
     stack<pair<int,string>> path_tracker;
