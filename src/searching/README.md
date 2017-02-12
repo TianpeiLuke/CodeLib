@@ -35,6 +35,7 @@ A __binary search tree (BST)__ contains a struct `BST_Node`, each tree node cont
 
       Input a sequence of digits as a string, and a LookUp table indicates all possible characters for given digit, print all possible combinations of output strings. 
 
+      `./backtracking  "13512" `
 
    2. All subsets 
   
