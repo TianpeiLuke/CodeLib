@@ -78,5 +78,10 @@ bool kthSmallestElem_abst_aux(ABST_Node* root, int& result, int k);
 
 bool medMaintanence(string filename, int length, vector<int>& history);
 
+// backtracking
+
+vector<string> backtracking_dfs(string input, const unordered_map<char, vector<char>> LookUpTable);
+
+vector<string> backtracking_bfs(string input, const unordered_map<char, vector<char>> LookUpTable);
 
 #endif
