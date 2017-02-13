@@ -15,6 +15,7 @@
 
 ## Parallel and CUDA GPU program
  1. [CUDA Basics](https://github.com/TianpeiLuke/CodeLib/tree/master/src/cuda)
+ 2. [Multi-thread](https://github.com/TianpeiLuke/CodeLib/tree/master/src/multi_thread)
 
 ## [Code Challenges](https://github.com/TianpeiLuke/CodeLib/tree/master/challenges)
 
