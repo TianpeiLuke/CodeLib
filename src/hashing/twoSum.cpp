@@ -53,19 +53,5 @@ vector<int> twoSum(vector<int>& nums, int target){
 }
 
 
-int main(){
-    vector<int> data;
-    data = {2,7,11,15,18,101,23};
-    int target  = 34;
-    cout<<"Find target "<<target<<" in sequence"<<endl;
-    for(int i=0; i< data.size(); i++){
-        cout<<data[i]<<" ";
-    } cout<<endl;
-    vector<int> result = twoSum(data, target);
-    cout<<"The position of two numbers: "<<endl;
-    cout<<result[0]<<" "<<result[1]<<endl;
-    return 0;
-}
-
 
 

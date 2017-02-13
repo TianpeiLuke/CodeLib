@@ -1,16 +1,23 @@
 #include <iostream>
+#include <sstream>
 #include <unordered_map>
 #include <vector>
 #include <fstream>
 #include <cmath>
 #include <cstdlib>
 #include <algorithm>
+#include <utility>
+#include <string>
+#include <map>
 
 
 #ifndef _HASHING
 #define _HASHING
 
+#ifndef _NAMESPACE
+#define _NAMESPACE
 using namespace std;
+#endif
 
 struct TreeNode{
     int val;
