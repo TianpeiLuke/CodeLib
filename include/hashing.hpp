@@ -31,6 +31,7 @@ struct TreeNode{
 // two Sum
 vector<int> twoSum(vector<int>& nums, int target);
 
+int twoSum_vec(vector<int>& nums, vector<int> targetList);
 
 vector<int> twoSum_sort(vector<int>& nums, int target);
 

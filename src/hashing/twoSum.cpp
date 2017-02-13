@@ -53,6 +53,61 @@ vector<int> twoSum(vector<int>& nums, int target){
 }
 
 
+int twoSum_vec(vector<int>& nums, vector<int> targetList){
+   /*
+      using the hash table as inverse mapping, it will track position j = hash[target-num[i]] 
+      This is O(n) complexity compare to the naive O(n^2) complexity
+   */
+    int count = 0;
+    if(nums.empty()) return count;
+    int n = nums.size();
+    if(n<2) return count;
+    
+    unordered_map<int, int> hash;
+    for(int i=0; i<n; i++){
+        int temp = nums[i];
+        hash[temp] = i;
+    }
+
+    bool iffind = false;
+    float progress = 0.0;
+    int barWidth = 50;
+    int iter = 0;
+
+    for(auto target: targetList){
+        iffind = false;
+        iter ++;
+        //================================================================
+        progress = float(iter) / float(targetList.size()); 
+        cout<<"[";
+        int pos = barWidth * progress;
+        for(int ii=0; ii< barWidth; ++ii){
+            if( ii < pos ) cout<< "=";
+            else if (ii == pos) cout<<">";
+            else cout<< " ";
+        }
+        cout<<"] "<< int(progress * 100.0) << " % "<<" Loop "<<iter<<"\r";
+        cout.flush();
+        //=========================================================
+        for(int i=0; i<n; i++){
+           int temp = nums[i];
+           int j = 0;
+           try {
+                 j = hash.at(target-temp); 
+           }
+           catch (const std::out_of_range& oor) {
+                 continue;
+           }
+           // if the target - nums[i] exist
+           if(j!=i){
+              iffind = true;
+              break;
+           }
+        }
+        if(iffind) count ++;
+    }
+    return count;
+}
 
 vector<int> twoSum_sort(vector<int>& nums, int target){
    /*
