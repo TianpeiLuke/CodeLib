@@ -14,7 +14,7 @@
  7. [Searching](https://github.com/TianpeiLuke/CodeLib/tree/master/src/searching) 
 
 ## Parallel and CUDA GPU program
- 1. [CUDA Basics](https://github.com/TianpeiLuke/CodeLib/tree/master/src/gpu_program)
+ 1. [CUDA Basics](https://github.com/TianpeiLuke/CodeLib/tree/master/src/cuda)
 
 ## [Code Challenges](https://github.com/TianpeiLuke/CodeLib/tree/master/challenges)
 
