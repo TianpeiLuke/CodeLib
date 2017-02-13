@@ -14,7 +14,7 @@ bool if_all_aug_visited(unordered_map<int, int> visited, int& next){
 }
 
 
-bool topsort_dfs_routine(const unordered_map<int, vector<int>> adjList, int root, unordered_map<int, int>& aug_visited, vector<int>& sorted_list){
+bool topsort_dfs_routine(const unordered_map<int, vector<int>> adjList, int root, unordered_map<int, int>& aug_visited, stack<int>& reverse_sorted_list, bool verbose=false){
     /*
            topological sorting based on depth-first-search 
 
@@ -27,7 +27,7 @@ bool topsort_dfs_routine(const unordered_map<int, vector<int>> adjList, int root
      //stack<int> path;
      //vector<int> sorted_list_part;
      bool success = true;
-     stack<int> reverse_pop;
+     //stack<int> reverse_pop;
      stack<int> tracker;
      tracker.push(root);
      bool all_children_visited = true;
@@ -37,7 +37,7 @@ bool topsort_dfs_routine(const unordered_map<int, vector<int>> adjList, int root
          all_temp_visited = false;
          int cur_node = tracker.top();
          if(aug_visited[cur_node] == 0){
-             cout<<"visit "<<cur_node<<endl;
+             if(verbose) cout<<"visit "<<cur_node<<endl;
              aug_visited[cur_node] = 1;
              //sorted_list.push_back(cur_node);
          }else if(aug_visited[cur_node] == 2){
@@ -72,14 +72,9 @@ bool topsort_dfs_routine(const unordered_map<int, vector<int>> adjList, int root
             //mark cur_node as visited-all neighbor finished
             aug_visited[cur_node] = 2;
             tracker.pop(); //backtrack to its parent
-            reverse_pop.push(cur_node);
-            cout<<"mark as black: "<<cur_node<<endl;
+            reverse_sorted_list.push(cur_node);
+            if(verbose) cout<<"mark as black: "<<cur_node<<endl;
          }
-     }
-     while(!reverse_pop.empty()){
-         int top_black = reverse_pop.top();
-         reverse_pop.pop();
-         sorted_list.push_back(top_black);
      }
      return success;
 }
@@ -102,11 +97,19 @@ bool topological_sort_dfs(const unordered_map<int, vector<int>> adjList, unorder
         aug_visited[it->first] = 0;
     }
 
+    stack<int> reverse_sorted_list;
     while(!if_all_aug_visited(aug_visited, root)){
-        success = topsort_dfs_routine(adjList, root, aug_visited, sorted_list);
+        success = topsort_dfs_routine(adjList, root, aug_visited, reverse_sorted_list);
         if(success == false){
            sorted_list.clear(); 
            break;
+        }
+    }
+    if(success){
+        while(!reverse_sorted_list.empty()){
+            int top_black = reverse_sorted_list.top();
+            reverse_sorted_list.pop();
+            sorted_list.push_back(top_black);
         }
     }
     return success;
