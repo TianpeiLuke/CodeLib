@@ -57,34 +57,8 @@ int main(int argc, char* argv[]){
     }
     int count =0;
     count = twoSum_vec(nums, targetList);
-    //int iter = 0;
-    //int count = 0 ;
-    //float progress = 0.0;
-    //int barWidth = 50;
-    //vector<int> result;
-    /*for(int target=lower; target<=upper; target++){
-        iter ++;
-        //================================================================
-        progress = float(iter) / float(upper-lower + 1); 
-        cout<<"[";
-        int pos = barWidth * progress;
-        for(int ii=0; ii< barWidth; ++ii){
-            if( ii < pos ) cout<< "=";
-            else if (ii == pos) cout<<">";
-            else cout<< " ";
-        }
-        cout<<"] "<< int(progress * 100.0) << " % "<<" Loop "<<iter<<"\r";
-        cout.flush();
-        //================================================================
-        //result = twoSum(nums, target);
-        //if(!result.empty()){ 
-        //   count ++;
-           //cout<<endl<<"valid target ratio: "<<count<<"/"<<(upper-lower+1)<<"\r";
-           //cout.flush();
-        //}
-        //else result.clear();
-    }*/
     cout<<endl<<"valid target ratio: "<<count<<"/"<<(upper-lower+1)<<endl;
+    //final result: 427
     return 0;
 }
 
