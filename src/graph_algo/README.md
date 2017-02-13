@@ -72,7 +72,7 @@ This subsection implements a set of graph-based algorithms. It consists of three
 
       Implementation using a min-heap maintaining `<node, key>` pair with key = Dijkstra's greedy score. Updating for each edges that passing from visited nodes to unvisited nodes. Very Fast implementation O(|E| + |V| log(|V|)) compared with a naive implementation which requires O(|V|^2)
 
-       `../../bin/test_dijkstra "../../data/dijkstraData.txt"`
+       `../../bin/graph_algo/test_dijkstra "../../data/dijkstraData.txt"`
 
 
    5. __Kruskal's algorithm__ in __minimal-spanning-tree (MST)__ 
