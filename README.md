@@ -12,6 +12,7 @@
  5. [Graph Algorithms](https://github.com/TianpeiLuke/CodeLib/tree/master/src/graph_algo)
  6. [Sorting](https://github.com/TianpeiLuke/CodeLib/tree/master/src/sorting)
  7. [Searching](https://github.com/TianpeiLuke/CodeLib/tree/master/src/searching) 
+
 ## Parallel and CUDA GPU program
  1. [CUDA Basics](https://github.com/TianpeiLuke/CodeLib/tree/master/src/gpu_program)
 
