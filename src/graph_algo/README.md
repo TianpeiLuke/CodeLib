@@ -15,7 +15,11 @@ This subsection implements a set of graph-based algorithms. It consists of three
 
    3. __Topological Ordering and Topological Sort__
 
-    The topological ordering of graph nodes requires all parents occurs before their children. Basic ordering on a graph. For undirected graph, can be implemented using BFS. For __directed graph__, __only DFS__ can be used 
+    The topological ordering of graph nodes requires all parents occurs before their children. Basic ordering on a graph. For undirected graph, can be implemented using BFS. For __directed graph__, __only DFS__ can be used.
+
+    Implemented using augmented visit list, with three states: 0=un-visited, 1=visited-but neighbors unfinished,  2=visited-all neighbors finished. Return the reverse order for nodes turning to state=2;
+
+    `../../bin/test_topsort "../../data/topsort.txt"`
 
 ## Graph Topology Algorithms
    1. __Union Find__
