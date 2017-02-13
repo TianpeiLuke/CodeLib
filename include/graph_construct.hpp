@@ -50,6 +50,10 @@ void edgeList_to_nodeHash(const vector<pair<int, int>>edgeList, unordered_map<in
 
 void show_edgeList(const vector<pair<int, int>> edgeList);
 
+bool if_all_visited(const unordered_map<int, bool> visited, int& next);
+
+//bool if_all_aug_visited(const unordered_map<int, int> aug_visited, int& next);
+
 //======================================================================
 // define the  disjoint-set data structure
 

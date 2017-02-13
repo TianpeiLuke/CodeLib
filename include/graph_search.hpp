@@ -31,6 +31,12 @@ void depth_first_traverse(const unordered_map<int, vector<int>> adjList, int roo
 
 bool depth_first_search(const unordered_map<int, vector<int>> adjList, int root, int target, unordered_map<int, bool>& visited);
 
+// topological sort
+
+bool topological_sort_dfs(const unordered_map<int, vector<int>> adjList, unordered_map<int, bool>& visited, vector<int>& sorted_list);
+
+
+bool topsort_dfs_routine(const unordered_map<int, vector<int>> adjList, int root, unordered_map<int, int>& aug_visited, vector<int>& sorted_list);
 
 // Remove Invalid Parentheses
 bool check(string s);

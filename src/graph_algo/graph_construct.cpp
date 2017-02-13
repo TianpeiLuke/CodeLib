@@ -334,6 +334,21 @@ void show_edgeList(const vector<pair<int,int>> edgeList){
        cout<<edge.first<<"->"<<edge.second<<endl;
     }
 }
+
+bool if_all_visited(unordered_map<int, bool> visited, int& next){
+    bool result = true;
+    next = -1;
+    for(auto it=visited.begin(); it!=visited.end(); it++){
+        if(it->second == false){
+            next = it->first;
+            result = false;
+            break;
+        }
+    }
+    return result;
+}
+
+
 //==========================================================================
 //   Disjoint-set data strcture
 void init_unionFind(const unordered_map<int, vector<int>> adjList, unordered_map<int, int>& parent){
