@@ -54,4 +54,38 @@ vector<int> twoSum(vector<int>& nums, int target){
 
 
 
+vector<int> twoSum_sort(vector<int>& nums, int target){
+   /*
+      using the hash table as inverse mapping, it will track position j = hash[target-num[i]] 
+      This is O(n) complexity compare to the naive O(n^2) complexity
+   */
+    vector<int> result;
+    if(nums.empty()) return result;
+    int n = nums.size();
+    if(n<2) return result;
+    
+    unordered_map<int, int> hash;
+    for(int i=0; i<n; i++){
+        int temp = nums[i];
+        hash[temp] = i;
+    }
+    
+    for(int i=0; i<n; i++){
+        int temp = nums[i];
+        int j = 0;
+        try {
+              j = hash.at(target-temp); 
+        }
+        catch (const std::out_of_range& oor) {
+              continue;
+        }
+        // if the target - nums[i] exists
+        if(j!= i){
+            result.push_back((i<j)? i: j);
+            result.push_back((i<j)? j: i);
+        }
+        return result;
+    }
+    return result;
+}
 

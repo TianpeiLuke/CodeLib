@@ -31,6 +31,9 @@ struct TreeNode{
 // two Sum
 vector<int> twoSum(vector<int>& nums, int target);
 
+
+vector<int> twoSum_sort(vector<int>& nums, int target);
+
 // maxSubArray Sum to k
 int maxSubArrayLen(vector<int>& nums, int k);
 

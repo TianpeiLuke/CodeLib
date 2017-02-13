@@ -71,7 +71,7 @@ int main(int argc, char* argv[]){
         cout.flush();
         //================================================================
         result = twoSum(nums, target);
-        if(result.empty()){ 
+        if(!result.empty()){ 
            count ++;
            //cout<<endl<<"valid target ratio: "<<count<<"/"<<(upper-lower+1)<<"\r";
            //cout.flush();
