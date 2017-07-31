@@ -4,7 +4,7 @@ This section contains several important features for C++ 11 and C++ 14. For adva
 
 ## Lambda function
 
-A Lambda function is an anonymous function object. It is usually used as a replacement of the defintion of a named class with an operator (). This function is particularly useful when we want to pass an operation as an argument to an algorithm. (Such operations usually referred as _callbacks_) 
+The concept of Lambda function is closely related to __functinal programming__, where the programmer defines functional that takes functor as input. A Lambda function is an anonymous function object. It is usually used as a replacement of the defintion of a named class with an operator (). This function is particularly useful when we want to pass an operation as an argument to an algorithm. (Such operations usually referred as _callbacks_) 
 
 Lambda function can be implemented in other ways. However, if the function is simple and is used as a passing operator, Lambda function is very effective and no need for additional codes.
 
@@ -74,6 +74,8 @@ Lambda function can be implemented in other ways. However, if the function is si
           Similar as above, applies function `f` to each element within a range
 
 
+## move, move semantics, perfect forwarding
 
+  Defined in 'utility' package. This is a helper function to avoid copies. A class may define additional _move-constructor_.  For instance, using a move constructor, a 'vector' could just copy its internal pointer to data to the new object, leaving the moved object in an incorrect state, avoiding copying all data. 
 
 
