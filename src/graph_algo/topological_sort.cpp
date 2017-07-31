@@ -14,9 +14,39 @@ bool if_all_aug_visited(unordered_map<int, int> visited, int& next){
 }
 
 
+bool topsort_dfs_routine_re(const unordered_map<int, vector<int>> adjList, int root, unordered_map<int, int>& aug_visited, stack<int>& reverse_sorted_list, bool verbose=false){
+    /*
+           topological sorting based on depth-first-search with recursion
+
+        Define an augmented visited map
+           three states: 
+                        0 = un-visited, 
+                        1 = visited-but neigbhors not finished yet
+                        2 = visited-all neighbors finished
+    */
+     bool success = true;
+     aug_visited[root] = 1;
+     vector<int> neighbors = adjList.at(root);
+
+     for(auto neighbor: neighbors){
+        if(aug_visited[neighbor] == 0){
+            success = success && topsort_dfs_routine_re(adjList, neighbor, aug_visited, reverse_sorted_list, verbose);
+            if(!success) return false;
+        }
+        else if(aug_visited[neighbor] == 1){
+            success = false;
+            return false;
+        }
+     }
+     //all children are finished
+     aug_visited[root] = 2;
+     reverse_sorted_list.push(root);
+     return success;
+}
+
 bool topsort_dfs_routine(const unordered_map<int, vector<int>> adjList, int root, unordered_map<int, int>& aug_visited, stack<int>& reverse_sorted_list, bool verbose=false){
     /*
-           topological sorting based on depth-first-search 
+           topological sorting based on depth-first-search w/o recursion
 
         Define an augmented visited map
            three states: 
@@ -100,6 +130,7 @@ bool topological_sort_dfs(const unordered_map<int, vector<int>> adjList, unorder
     stack<int> reverse_sorted_list;
     while(!if_all_aug_visited(aug_visited, root)){
         success = topsort_dfs_routine(adjList, root, aug_visited, reverse_sorted_list);
+        //success = topsort_dfs_routine_re(adjList, root, aug_visited, reverse_sorted_list);
         if(success == false){
            sorted_list.clear(); 
            break;

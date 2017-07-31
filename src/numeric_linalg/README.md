@@ -16,8 +16,10 @@ This section implements some important linear algebra algorithms.
 
 ## Matrix decomposition 
   
-  1. __QR decompostion__
+  1. __LU factorization__
 
-  2. __Cholosky decomposition__
+  2. __QR decompostion__
 
-  3. __Singular value decomposition__
+  3. __Cholosky decomposition__
+
+  4. __Singular value decomposition__
