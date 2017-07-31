@@ -10,7 +10,7 @@ Lambda function can be implemented in other ways. However, if the function is si
 
    1. The basic gramma
 
-    ` [capture](arg)->ret{ body }  ` 
+    `[capture](arg)->ret{ body }` 
 
     a. The `arg` means the argument passed to the body
     
@@ -31,6 +31,10 @@ Lambda function can be implemented in other ways. However, if the function is si
        `[&, x]` means the default is to capture by reference, but variable x is captured by value
 
 
+    This is equivalent to 
+
+       ` struct f{ ret operator()(arg){body;};  }   `
+
 
    2. Initialize variable using Lambda function
 
@@ -38,4 +42,38 @@ Lambda function can be implemented in other ways. However, if the function is si
       `int s=4; auto x = [&r = s, s= s+1]()-> int { r+= 2; return s+2; }();  `
 
       This part of code initialized the variable `x` with a lambda function. This lambda function find an outside variable `s`, capture it by reference to inner variable `r` and also capture it  by value to inner variable `s`. During the execution, `r` will be updated to `2`, the return is specified as `int` type, and it is the value of `4+1+2 = 7`; finally, the parenthese `()` at the end means that the lambda function is executed immediately upon definition. If the `arg` is not empty, this parenthese should include the value of arg. 
+
+
+   3. Useful functions that have Lambda functions as callbacks (defined in package `algorithm`)
+
+
+      a. `std::sort(container.begin(), container.end(), Compare comp);`
+
+         It sorts the `container [begin(), end()]`;
+
+         In this function, the `Compare` is defined as `struct Compare { bool operator()(T x, T y){ return x < y; }  }`
+
+         Use a lambda function we can define `[](auto x, auto y){ return x < y;}`
+
+
+      b. `std::transform(Input_container.begin(), Input_container.end(), Ouput_container.begin(), Unary_Operation op);`
+
+         or
+
+          `std::transform(Input_container1.begin(), Input_container1.end(), Input_container2.begin(), Ouput_container.begin(), Unary_Operation op);`
+
+
+         It applies the `op` operation to each elements in one range such as `Input_container` from `begin()` to `end()` and output begins with `Output_container.begin()`; It can also applied to two ranges `Input_*1` and `Input_*2`;
+
+         The operator `op` can be defined by a lambda function.
+
+
+
+      c. `std::for_each(Input_container.begin(), Input_container.end(), Function f)` 
+
+          Similar as above, applies function `f` to each element within a range
+
+
+
+
 
