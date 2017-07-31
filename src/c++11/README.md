@@ -49,7 +49,7 @@ Lambda function can be implemented in other ways. However, if the function is si
 
       a. `std::sort(container.begin(), container.end(), Compare comp);`
 
-         It sorts the `container [begin(), end()]`;
+         It sorts the `container [begin(), end()]`; The Compare function defines the ascending order (if reverse then descending order);
 
          In this function, the `Compare` is defined as `struct Compare { bool operator()(T x, T y){ return x < y; }  }`
 
@@ -74,7 +74,19 @@ Lambda function can be implemented in other ways. However, if the function is si
           Similar as above, applies function `f` to each element within a range
 
 
-## move, move semantics, perfect forwarding
+      d. `std::remove_if(container.begin(), container.end(), UnaryPredicate pred)`
+
+          remove element within the range [begin(), end()] such that `pred` returns true;
+
+
+      e. `std::find_if(...)` as above
+
+
+      f. `std::replace_if(...)` as above
+
+ 
+
+## Move method, move semantics, perfect forwarding
 
   Defined in 'utility' package. This is a helper function to avoid copies. A class may define additional _move-constructor_.  For instance, using a move constructor, a 'vector' could just copy its internal pointer to data to the new object, leaving the moved object in an incorrect state, avoiding copying all data. 
 
