@@ -1,8 +1,49 @@
 
 #include "../../include/searching.hpp"
 
+//backtracking using recursion
+vector<string> letterCombinations(string digits) {
+    vector<string> res;
+    if(digits.empty()) return res;
+    int n = digits.size();
+    string track;
+    unordered_map<char, string> codebook;
+    codebook['0'] = " ";
+    codebook['2'] = "abc";
+    codebook['3'] = "def";
+    codebook['4'] = "ghi";
+    codebook['5'] = "jkl";
+    codebook['6'] = "mno";
+    codebook['7'] = "pqrs";
+    codebook['8'] = "tuv";
+    codebook['9'] = "wxyz";
+    letterCombineDFS(codebook, digits, 0, track, res);
+    return res;
+}
+
+void letterCombineDFS(unordered_map<char, string> codebook, string digits, int level, string& track, vector<string>& res){
+    if(track.size() == digits.size()){
+        //end conditions, track ends here
+        //stack solutions
+        res.push_back(track);
+        return;
+    }
+    else{
+        //find all of neighbors/possible actions
+        string neighbors = codebook[digits[level]];
+        for(char a: neighbors){
+            //track the choice
+            track.push_back(a);
+            //next step 
+            letterCombineDFS(codebook, digits, level+1, track, res);
+            //untrack the choice
+            track.pop_back();
+        }
+    }
+}
 
 
+//backtracking using stacks
 vector<string> backtracking_dfs(string input, const unordered_map<char, vector<char>> LookUpTable){
    /*
          LookUpTable['1'] = {'a', 'b', 'c','d'}
@@ -93,3 +134,9 @@ vector<string> backtracking_dfs(string input, const unordered_map<char, vector<c
     }
     return results;
 }
+
+
+
+
+
+

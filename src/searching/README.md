@@ -30,6 +30,27 @@ A __binary search tree (BST)__ contains a struct `BST_Node`, each tree node cont
    Advantages for __recursive__ mode is that it is easy to code. The __disadvantages__ is that _repeated function calls_ waste time. Also for some applications, the DFS-based backtracking would go __too deep__ so that the system stack __overflow__. 
 
    The advantage of __stack-implemented__ version is that it saves time in function calls and also it can be modified to avoid repeated computing the same subproblem. 
+ 
+    The common implementation of backtracking using recursion
+    
+
+    DFS(data, candidates, cur, &track, &res){
+     if (current status fit output requirement){
+           res.push_back(track);
+           return;
+     }
+     else{
+           neighbors = find_all_neighbor(data[cur], candidates);
+           for(auto x: neighbors){
+                  //do the action
+                  track.push_back(x);
+                  //recursion call-back
+                  DFS(data, candidates, cur+1, track, res);
+                  //undo the action
+                  track.pop_back();
+           }
+     }
+   }
   
    1. All paths in a graph 
 
