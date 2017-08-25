@@ -33,7 +33,7 @@ A __binary search tree (BST)__ contains a struct `BST_Node`, each tree node cont
  
     The common implementation of backtracking using recursion
     
-
+   ```
     DFS(data, candidates, cur, &track, &res){
      if (current status fit output requirement){
            res.push_back(track);
@@ -51,7 +51,8 @@ A __binary search tree (BST)__ contains a struct `BST_Node`, each tree node cont
            }
      }
    }
-  
+  ```
+
    1. All paths in a graph 
 
       Input a sequence of digits as a string, and a LookUp table indicates all possible characters for given digit, print all possible combinations of output strings. 
